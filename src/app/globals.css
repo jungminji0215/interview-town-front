@@ -1,8 +1,9 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--color-rose-quartz);
 }
 
 /*
@@ -26,6 +27,9 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --color-rose-quartz: #f8cacc;
+  --color-serenity: #8da4d0;
 }
 
 @media (prefers-color-scheme: dark) {
