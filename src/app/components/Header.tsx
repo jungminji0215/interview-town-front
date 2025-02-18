@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Header() {
   return (
-    <header className="bg-gray-300">
+    <header className="bg-gray-300 px-5">
       <nav className="bg-yellow-300 max-w-5xl mx-auto py-5 flex justify-between items-center">
         <Link href={ROUTES.HOME}>면접 타운</Link>
         <div className="flex items-center gap-5">
