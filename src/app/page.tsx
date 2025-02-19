@@ -1,6 +1,8 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
-    <div className="bg-green-200 max-w-5xl mx-auto py-5 px-5">
+    <section className="bg-green-200 max-w-5xl mx-auto py-5 px-5">
       <aside className="">
         <section aria-labelledby="categories-heading" className="bg-red-200">
           <h2 id="categories-heading" className="text-gray-500">
@@ -32,8 +34,10 @@ export default function Home() {
       <section className="bg-green-300 py-5">
         <ul className="flex flex-col gap-5">
           <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
+            <Link href="/questions/1">
+              이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
+              질문입니다.
+            </Link>
           </li>
           <li className="border border-black rounded-md py-8 px-3">
             이것은 질문입니다.
@@ -82,6 +86,6 @@ export default function Home() {
           </li>
         </ul>
       </section>
-    </div>
+    </section>
   );
 }
