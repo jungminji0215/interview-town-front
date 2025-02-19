@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className="flex flex-col min-h-screen">
         <Header />
-        <main className="grow bg-blue-200 px-5">{children}</main>
+        <main className="grow bg-blue-200">{children}</main>
         <Footer />
       </body>
     </html>

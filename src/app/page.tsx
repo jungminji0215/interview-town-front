@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div className="max-w-5xl mx-auto py-5">
-      <aside className="bg-green-200">
+    <div className="bg-green-200 max-w-5xl mx-auto py-5 px-5">
+      <aside className="">
         <section aria-labelledby="categories-heading" className="bg-red-200">
           <h2 id="categories-heading" className="text-gray-500">
             직무 선택
