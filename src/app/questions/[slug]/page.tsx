@@ -75,7 +75,7 @@ const answers = [
 
 export default function QuestionPage() {
   return (
-    <section className="bg-green-200 max-w-5xl mx-auto py-5 px-5 flex flex-col h-full gap-3">
+    <section className="max-w-5xl mx-auto py-5 px-5 flex flex-col h-full gap-3">
       {/* 질문 내용 */}
       <section
         aria-labelledby="question-heading"
@@ -96,9 +96,9 @@ export default function QuestionPage() {
       {/* 답변 유도 설명글 */}
       <section
         aria-labelledby="explanation-heading"
-        className="bg-gray-200 flex flex-col items-center py-3 text-gray-600 rounded-xl"
+        className=" flex flex-col items-center py-3 text-gray-500 rounded-xl"
       >
-        <h2 id="explanation-heading" className="text-md font-bold">
+        <h2 id="explanation-heading" className="text-sm font-bold">
           실제 면접이라고 생각하고 답변을 남겨보세요.
         </h2>
         <p className="text-sm">
@@ -107,13 +107,13 @@ export default function QuestionPage() {
       </section>
 
       {/* 다른 사람들이 남긴 답변 목록 */}
-      <section className="bg-yellow-300 flex-1 overflow-y-auto p-5 rounded-xl">
+      <section className="border-4 border-yellow-300 flex-1 overflow-y-auto p-5 rounded-xl">
         <ul className="flex flex-col gap-5">
           {answers.length > 0 ? (
             answers.map((answer) => (
               <li
                 key={answer.id}
-                className="border border-black w-4/5 rounded-xl"
+                className="border border-black w-4/5 rounded-xl p-2 text-sm"
               >
                 <p>{answer.text}</p>
               </li>
@@ -125,20 +125,20 @@ export default function QuestionPage() {
       </section>
 
       {/* 내가 답변 남기는 영역 */}
-      <section className="flex items-center bg-gray-400 px-5">
+      <section className="flex items-center">
         <form className="flex items-center flex-1 gap-3">
           <textarea
             placeholder="여기에 답변을 입력하세요."
-            className="border resize-none w-full rounded-xl px-2 py-5"
+            className="border-4 resize-none w-full rounded-xl px-2 py-5 border-yellow-300"
           />
           <button
             type="submit"
-            className="border cursor-pointer rounded-xl py-2"
+            className="border-4 border-yellow-300 cursor-pointer rounded-xl px-2 py-8 whitespace-nowrap"
           >
             답변 등록
           </button>
         </form>
-        <Image src={"/answer.svg"} width={80} height={80} alt="interview" />
+        {/* <Image src={"/answer.svg"} width={80} height={80} alt="interview" /> */}
       </section>
     </section>
   );

@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <section className="bg-green-200 max-w-5xl mx-auto py-5 px-5">
+    <section className="max-w-5xl mx-auto py-5 px-5">
       <aside className="">
-        <section aria-labelledby="categories-heading" className="bg-red-200">
+        <section aria-labelledby="categories-heading" className="">
           <h2 id="categories-heading" className="text-gray-500">
             직무 선택
           </h2>
@@ -19,7 +19,7 @@ export default function Home() {
           </ul>
         </section>
 
-        <section aria-labelledby="tags-heading" className="bg-red-100 mt-5">
+        <section aria-labelledby="tags-heading" className=" mt-5">
           <h2 id="tags-heading" className="text-gray-500">
             태그
           </h2>
@@ -31,7 +31,7 @@ export default function Home() {
         </section>
       </aside>
 
-      <section className="bg-green-300 py-5">
+      <section className="py-5">
         <ul className="flex flex-col gap-5">
           <li className="border border-black rounded-md py-8 px-3">
             <Link href="/questions/1">
