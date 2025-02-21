@@ -3,7 +3,11 @@ import Categories from "./Categories";
 import Tags from "./Tags";
 import Questions from "./Questions";
 
-export default function HomeClient({ categories, initialTags }) {
+export default function HomeClient({
+  categories,
+  initialTags,
+  initialQuestions,
+}) {
   return (
     <>
       <aside>
@@ -15,7 +19,7 @@ export default function HomeClient({ categories, initialTags }) {
         </section>
       </aside>
       <section className="py-5">
-        <Questions />
+        <Questions initialQuestions={initialQuestions} />
       </section>
     </>
   );
