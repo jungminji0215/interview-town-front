@@ -6,8 +6,9 @@ export const categoriesAPI = {
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-store", // TODO SSR 테스트
     });
-    const data = await response.json();
+    const { data } = await response.json();
 
     return data;
   },

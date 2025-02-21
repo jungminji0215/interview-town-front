@@ -1,24 +1,22 @@
 import { categoriesAPI } from "@/services/categories";
-import Categories from "./components/Categories";
-import Tags from "./components/Tags";
-import Questions from "./components/Questions";
+
+import { tagsAPI } from "@/services/tags";
+import HomeClient from "./components/HomeClient";
 
 export default async function Home() {
   const { categories } = await categoriesAPI.getCategories();
 
+  const { tags } = await tagsAPI.getTagsByCategory("frontend");
+  console.log("tags :>> ", tags);
+  // const { questions } = await questionsAPI.getQuestions("frontend"); // 프론트엔드 기본 질문
+
   return (
     <section className="max-w-5xl mx-auto py-5 px-5">
-      <aside className="">
-        <section aria-labelledby="categories-heading" className="">
-          <Categories data={categories} />
-        </section>
-        <section aria-labelledby="tags-heading" className=" mt-5">
-          <Tags />
-        </section>
-      </aside>
-      <section className="py-5">
-        <Questions />
-      </section>
+      <HomeClient
+        categories={categories}
+        initialTags={tags}
+        // initialQuestions={questions}
+      />
     </section>
   );
 }
