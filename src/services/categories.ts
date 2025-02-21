@@ -1,4 +1,5 @@
 export const categoriesAPI = {
+  // TODO error handling
   async getCategories() {
     const response = await fetch("http://localhost:8080/categories", {
       method: "GET",
@@ -6,12 +7,7 @@ export const categoriesAPI = {
         "Content-Type": "application/json",
       },
     });
-
     const data = await response.json();
-
-    if (response.status !== 200) {
-      throw new Error(data.message);
-    }
 
     return data;
   },

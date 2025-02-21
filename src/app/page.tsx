@@ -1,90 +1,23 @@
-import Link from "next/link";
+import { categoriesAPI } from "@/services/categories";
+import Categories from "./components/Categories";
+import Tags from "./components/Tags";
+import Questions from "./components/Questions";
 
-export default function Home() {
+export default async function Home() {
+  const { categories } = await categoriesAPI.getCategories();
+
   return (
     <section className="max-w-5xl mx-auto py-5 px-5">
       <aside className="">
         <section aria-labelledby="categories-heading" className="">
-          <h2 id="categories-heading" className="text-gray-500">
-            직무 선택
-          </h2>
-          <ul className="flex gap-3 py-2 text-2xl">
-            <li className="border border-black rounded-full px-2">
-              프론트엔드
-            </li>
-            <li className="border border-black rounded-full px-2">백엔드</li>
-            <li className="border border-black rounded-full px-2">
-              안드로이드
-            </li>
-          </ul>
+          <Categories data={categories} />
         </section>
-
         <section aria-labelledby="tags-heading" className=" mt-5">
-          <h2 id="tags-heading" className="text-gray-500">
-            태그
-          </h2>
-          <ul className="flex gap-3 py-2 text-sm">
-            <li className="border border-black rounded-md px-1">#react</li>
-            <li className="border border-black rounded-md px-1">#javascript</li>
-            <li className="border border-black rounded-md px-1">#nextjs</li>
-          </ul>
+          <Tags />
         </section>
       </aside>
-
       <section className="py-5">
-        <ul className="flex flex-col gap-5">
-          <li className="border border-black rounded-md py-8 px-3">
-            <Link href="/questions/1">
-              이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-              질문입니다.
-            </Link>
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.이것은 질문입니다.이것은 질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
-          </li>
-          <li className="border border-black rounded-md py-8 px-3">
-            이것은 질문입니다.이것은 질문입니다.이것은 질문입니다.이것은
-            질문입니다.
-          </li>
-        </ul>
+        <Questions />
       </section>
     </section>
   );
