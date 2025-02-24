@@ -10,10 +10,10 @@ interface Props {
 export default function Tags({ tags, selected, onSelectTag }: Props) {
   return (
     <>
-      <h2 id="tags-heading" className="text-gray-400 text-sm">
+      <h2 id="tags-heading" className="text-gray-400 text-xs">
         태그
       </h2>
-      <ul className="flex gap-3 py-2 text-sm">
+      <ul className="flex gap-3 py-2">
         {tags.map((tag) => {
           return (
             <li
@@ -23,7 +23,7 @@ export default function Tags({ tags, selected, onSelectTag }: Props) {
                 selected === tag.name ? "bg-secondary" : "bg-white"
               }`}
             >
-              {tag.name}
+              <p className="text-sm font-title">{tag.name}</p>
             </li>
           );
         })}

@@ -7,8 +7,8 @@ export default function Header() {
   return (
     <header className="bg-primary">
       <nav className="max-w-5xl mx-auto py-5 px-5 flex justify-between items-center">
-        <Link href={ROUTES.HOME} className="font-bold text-3xl">
-          면접 타운
+        <Link href={ROUTES.HOME}>
+          <p className="font-logo text-3xl flex">면접 타운</p>
         </Link>
         <div className="flex items-center gap-5">
           <ul className="flex items-center gap-3">

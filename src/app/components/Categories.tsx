@@ -14,10 +14,10 @@ export default function Categories({
 }: Props) {
   return (
     <>
-      <h2 id="categories-heading" className="text-gray-400 text-sm">
+      <h2 id="categories-heading" className="text-gray-400 text-xs">
         직무 선택
       </h2>
-      <ul className="flex gap-3 py-2 text-2xl">
+      <ul className="flex gap-3 py-2 ">
         {categories.map((category) => {
           return (
             <li
@@ -27,7 +27,7 @@ export default function Categories({
                 selected === category.name ? "bg-secondary" : "bg-white"
               }`}
             >
-              {category.name}
+              <p className="text-lg font-title">{category.name}</p>
             </li>
           );
         })}

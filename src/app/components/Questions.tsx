@@ -13,9 +13,11 @@ export default function Questions({ questions }: Props) {
         return (
           <li
             key={question.id}
-            className="border rounded-lg py-8 px-3 cursor-pointer hover:scale-105 shadow-md"
+            className="border rounded-lg py-8 px-3 cursor-pointer hover:scale-105 shadow-md "
           >
-            <Link href={`/questions/${question.id}`}>{question.title}</Link>
+            <Link href={`/questions/${question.id}`}>
+              <p className="font-content">{question.title}</p>
+            </Link>
           </li>
         );
       })}
