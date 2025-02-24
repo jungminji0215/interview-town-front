@@ -1,6 +1,8 @@
 export const tagsAPI = {
   // TODO error handling
   async getTagsByCategory(category: string) {
+    console.log("========== getTagsByCategory ==========");
+
     const response = await fetch(
       `http://localhost:8080/tags?category=${category}`,
       {

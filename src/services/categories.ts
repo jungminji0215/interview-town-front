@@ -1,12 +1,14 @@
 export const categoriesAPI = {
   // TODO error handling
   async getCategories() {
+    console.log("========== getCategories ==========");
+
     const response = await fetch("http://localhost:8080/categories", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      cache: "no-store", // TODO SSR 테스트
+      cache: "no-store",
     });
     const data = await response.json();
 

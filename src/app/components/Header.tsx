@@ -5,14 +5,16 @@ import React from "react";
 
 export default function Header() {
   return (
-    <header className="bg-yellow-300">
+    <header className="bg-primary">
       <nav className="max-w-5xl mx-auto py-5 px-5 flex justify-between items-center">
-        <Link href={ROUTES.HOME}>면접 타운</Link>
+        <Link href={ROUTES.HOME} className="font-bold text-3xl">
+          면접 타운
+        </Link>
         <div className="flex items-center gap-5">
           <ul className="flex items-center gap-3">
-            <li className="border border-gray-300 p-1 rounded-xl text-sm">
+            {/* <li className="border border-gray-300 p-1 rounded-xl text-sm">
               <Link href={ROUTES.CONTACT}>이메일 문의</Link>
-            </li>
+            </li> */}
             <li>
               <Link href={ROUTES.LOGIN}>로그인</Link>
             </li>

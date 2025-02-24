@@ -1,6 +1,8 @@
 export const questionsAPI = {
   // TODO error handling
   async getQuestions(category: string) {
+    console.log("========== getQuestions ==========");
+
     const response = await fetch(
       `http://localhost:8080/questions?category=${category}`,
       {
@@ -8,7 +10,7 @@ export const questionsAPI = {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "no-store", // TODO SSR 테스트
+        cache: "no-store",
       }
     );
     const data = await response.json();

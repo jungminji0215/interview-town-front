@@ -8,12 +8,12 @@ interface Props {
 
 export default function Questions({ questions }: Props) {
   return (
-    <ul className="grid grid-cols-2 gap-5">
+    <ul className="grid md:grid-cols-2 grid-cols-1 gap-8">
       {questions.map((question) => {
         return (
           <li
             key={question.id}
-            className="border border-black rounded-md py-8 px-3"
+            className="border rounded-lg py-8 px-3 cursor-pointer hover:scale-105 shadow-md"
           >
             <Link href={`/questions/${question.id}`}>{question.title}</Link>
           </li>
