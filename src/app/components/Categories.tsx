@@ -1,7 +1,11 @@
-import { CategoriesProps } from "@/types/category";
+import { Category } from "@/types/category";
 import React from "react";
 
-export default function Categories({ categories }: CategoriesProps) {
+interface Props {
+  categories: Category[];
+}
+
+export default function Categories({ categories }: Props) {
   return (
     <>
       <h2 id="categories-heading" className="text-gray-500">

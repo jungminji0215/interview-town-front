@@ -11,7 +11,7 @@ export const tagsAPI = {
         cache: "no-store",
       }
     );
-    const { data } = await response.json();
+    const data = await response.json();
 
     return data;
   },

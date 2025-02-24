@@ -3,7 +3,3 @@ export interface Category {
   name: string;
   description: string;
 }
-
-export interface CategoriesProps {
-  data: Category[];
-}

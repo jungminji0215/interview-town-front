@@ -1,13 +1,24 @@
+"use client";
+
 import React from "react";
 import Categories from "./Categories";
 import Tags from "./Tags";
 import Questions from "./Questions";
+import { Category } from "@/types/category";
+import { Tag } from "@/types/tag";
+import { Question } from "@/types/question";
+
+interface Props {
+  categories: Category[];
+  initialTags: Tag[];
+  questions: Question[];
+}
 
 export default function HomeClient({
   categories,
   initialTags,
-  initialQuestions,
-}) {
+  questions,
+}: Props) {
   return (
     <>
       <aside>
@@ -19,7 +30,7 @@ export default function HomeClient({
         </section>
       </aside>
       <section className="py-5">
-        <Questions initialQuestions={initialQuestions} />
+        <Questions questions={questions} />
       </section>
     </>
   );

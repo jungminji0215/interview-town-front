@@ -1,10 +1,15 @@
+import { Question } from "@/types/question";
 import Link from "next/link";
 import React from "react";
 
-export default function Questions({ initialQuestions }) {
+interface Props {
+  questions: Question[];
+}
+
+export default function Questions({ questions }: Props) {
   return (
     <ul className="grid grid-cols-2 gap-5">
-      {initialQuestions.data.questions.map((question) => {
+      {questions.map((question) => {
         return (
           <li
             key={question.id}

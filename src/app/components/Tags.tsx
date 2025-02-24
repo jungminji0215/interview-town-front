@@ -1,6 +1,11 @@
+import { Tag } from "@/types/tag";
 import React from "react";
 
-export default function Tags({ tags }) {
+interface Props {
+  tags: Tag[];
+}
+
+export default function Tags({ tags }: Props) {
   return (
     <>
       <h2 id="tags-heading" className="text-gray-500">
