@@ -1,3 +1,4 @@
+import { questionsAPI } from "@/services/questions";
 import React from "react";
 
 // TODO 예시 데이터 (실제 데이터로 대체)
@@ -72,7 +73,17 @@ const answers = [
   },
 ];
 
-export default function QuestionPage() {
+export default async function QuestionPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const slug = (await params).slug;
+
+  const {
+    data: { question },
+  } = await questionsAPI.getQuestion(Number(slug));
+
   return (
     <section className="max-w-5xl mx-auto py-5 px-5 flex flex-col h-full gap-3">
       <section
@@ -84,10 +95,7 @@ export default function QuestionPage() {
           <h1 id="question-heading" className="sr-only">
             면접 질문
           </h1>
-          <p className="font-content w-full">
-            이곳에 질문의 본문 내용이 들어갑니다. 이곳에 질문의 본문 내용이
-            들어갑니다. 이곳에 질문의 본문 내용이 들어갑니다.
-          </p>
+          <p className="font-content w-full">{question.title}</p>
         </div>
       </section>
 
