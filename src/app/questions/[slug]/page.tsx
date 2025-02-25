@@ -1,19 +1,18 @@
-import Image from "next/image";
 import React from "react";
 
 // TODO 예시 데이터 (실제 데이터로 대체)
 const answers = [
   {
     id: 1,
-    text: " 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다.",
+    text: "이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. ",
   },
   {
     id: 2,
-    text: " 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다.",
+    text: "이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다.",
   },
   {
     id: 3,
-    text: " 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다.",
+    text: "이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다.",
   },
   {
     id: 4,
@@ -29,11 +28,11 @@ const answers = [
   },
   {
     id: 7,
-    text: " 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다.",
+    text: "이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다.",
   },
   {
     id: 8,
-    text: " 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다. 이것은 다른 사람이 남긴 질문에 대한 답변입니다.",
+    text: "답변입니다.",
   },
   {
     id: 9,
@@ -76,17 +75,16 @@ const answers = [
 export default function QuestionPage() {
   return (
     <section className="max-w-5xl mx-auto py-5 px-5 flex flex-col h-full gap-3">
-      {/* 질문 내용 */}
       <section
         aria-labelledby="question-heading"
         className="flex gap-5 items-center"
       >
-        <Image src={"/interview.png"} width={70} height={70} alt="interview" />
-        <div className="bg-yellow-100 py-3 px-5 rounded-xl">
-          <h1 id="question-heading" className="text-lg font-bold">
-            질문입니다. 어쩌구 저쩌구를 말씀해주세요
+        {/* <Image src={"/interview.png"} width={70} height={70} alt="interview" /> */}
+        <div className="bg-secondary py-3 px-5 rounded-xl w-full">
+          <h1 id="question-heading" className="sr-only">
+            면접 질문
           </h1>
-          <p>
+          <p className="font-content w-full">
             이곳에 질문의 본문 내용이 들어갑니다. 이곳에 질문의 본문 내용이
             들어갑니다. 이곳에 질문의 본문 내용이 들어갑니다.
           </p>
@@ -96,44 +94,46 @@ export default function QuestionPage() {
       {/* 답변 유도 설명글 */}
       <section
         aria-labelledby="explanation-heading"
-        className=" flex flex-col items-center py-3 text-gray-500 rounded-xl"
+        className=" flex flex-col items-center text-gray-500 rounded-xl"
       >
-        <h2 id="explanation-heading" className="text-sm font-bold">
-          실제 면접이라고 생각하고 답변을 남겨보세요.
+        <h2 id="explanation-heading" className="text-sm font-content">
+          답변을 남기고, 다른 사람들의 답변과 비교하며 보완하세요!
         </h2>
-        <p className="text-sm">
-          다른 사람들의 답변과 비교해보면서 답변을 보완해보세요!
-        </p>
       </section>
 
       {/* 다른 사람들이 남긴 답변 목록 */}
-      <section className="border-4 border-yellow-300 flex-1 overflow-y-auto p-5 rounded-xl">
-        <ul className="flex flex-col gap-5">
-          {answers.length > 0 ? (
-            answers.map((answer) => (
+      <section className="border border-gray-200 flex-1 overflow-y-auto p-5 rounded-xl">
+        {answers.length > 0 ? (
+          <ul className="flex flex-col gap-5">
+            {answers.map((answer) => (
               <li
                 key={answer.id}
-                className="border border-black w-4/5 rounded-xl p-2 text-sm"
+                className="bg-gray-100 rounded-3xl px-4 py-2 text-sm w-fit"
               >
-                <p>{answer.text}</p>
+                <p className="font-content">{answer.text}</p>
               </li>
-            ))
-          ) : (
-            <div>답변이 등록되지 않았습니다.</div>
-          )}
-        </ul>
+            ))}
+          </ul>
+        ) : (
+          <div className="flex justify-center items-center">
+            <p className="font-content py-20 text-xl text-center text-gray-400">
+              답변이 등록되지 않았습니다. <br />
+              제일 먼저 답변하는 면접자가 되어보세요!
+            </p>
+          </div>
+        )}
       </section>
 
       {/* 내가 답변 남기는 영역 */}
       <section className="flex items-center">
-        <form className="flex items-center flex-1 gap-3">
+        <form className="flex flex-col items-center flex-1 gap-2">
           <textarea
             placeholder="여기에 답변을 입력하세요."
-            className="border-4 resize-none w-full rounded-xl px-2 py-5 border-yellow-300"
+            className="resize-none w-full bg-gray-100 rounded-3xl px-4 py-2 text-sm"
           />
           <button
             type="submit"
-            className="border-4 border-yellow-300 cursor-pointer rounded-xl px-2 py-8 whitespace-nowrap"
+            className="cursor-pointer rounded-2xl bg-secondary font-content px-3 py-2 self-end text-sm"
           >
             답변 등록
           </button>
