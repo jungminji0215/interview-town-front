@@ -1,11 +1,11 @@
 import { Category } from "@/types/category";
 import React from "react";
 
-interface Props {
+type Props = {
   categories: Category[];
   selected: string;
   onSelectCategory: (category: string) => void;
-}
+};
 
 export default function Categories({
   categories,

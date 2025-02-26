@@ -2,9 +2,9 @@ import { Question } from "@/types/question";
 import Link from "next/link";
 import React from "react";
 
-interface Props {
+type Props = {
   questions: Question[];
-}
+};
 
 export default function Questions({ questions }: Props) {
   return (

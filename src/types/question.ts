@@ -1,7 +1,7 @@
 import { Tag } from "./tag";
 
-export interface Question {
+export type Question = {
   id: number;
   title: string;
   tag: Tag;
-}
+};

@@ -1,11 +1,11 @@
 import { Tag } from "@/types/tag";
 import React from "react";
 
-interface Props {
+type Props = {
   tags: Tag[];
   selected: string;
   onSelectTag: (tag: string) => void;
-}
+};
 
 export default function Tags({ tags, selected, onSelectTag }: Props) {
   return (

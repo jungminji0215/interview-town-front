@@ -9,13 +9,13 @@ import { Tag } from "@/types/tag";
 import { Question } from "@/types/question";
 import { useRouter } from "next/navigation";
 
-interface Props {
+type Props = {
   categories: Category[];
   tags: Tag[];
   initialQuestions: Question[];
   currentCategory: string;
   currentTag: string;
-}
+};
 
 export default function HomeClient({
   categories,

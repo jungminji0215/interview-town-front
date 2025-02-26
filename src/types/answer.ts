@@ -1,7 +1,7 @@
 import { ApiResponse } from "./common";
-export interface Answer {
+export type Answer = {
   id: number;
   text: string;
-}
+};
 
 export type AnswersResponse = ApiResponse<{ answers: Answer[] }>;
