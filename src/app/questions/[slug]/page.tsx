@@ -1,3 +1,4 @@
+import AnswerForm from "@/app/components/AnswerForm";
 import { answersAPI } from "@/services/answers";
 import { questionsAPI } from "@/services/questions";
 import React from "react";
@@ -67,18 +68,7 @@ export default async function QuestionPage({
 
       {/* 내가 답변 남기는 영역 */}
       <section className="flex items-center">
-        <form className="flex flex-col items-center flex-1 gap-2">
-          <textarea
-            placeholder="여기에 답변을 입력하세요."
-            className="resize-none w-full bg-gray-100 rounded-3xl px-4 py-2 text-sm"
-          />
-          <button
-            type="submit"
-            className="cursor-pointer rounded-2xl bg-secondary font-content px-3 py-2 self-end text-sm"
-          >
-            답변 등록
-          </button>
-        </form>
+        <AnswerForm questionId={question.id} />
         {/* <Image src={"/answer.svg"} width={80} height={80} alt="interview" /> */}
       </section>
     </section>
