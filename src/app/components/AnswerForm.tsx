@@ -6,9 +6,10 @@ import React, { useState } from "react";
 export default function AnswerForm({ questionId }: { questionId: number }) {
   const [content, setContent] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    answersAPI.addAnswer(questionId, content);
+    await answersAPI.addAnswer(questionId, content);
+    setContent("");
   };
 
   return (

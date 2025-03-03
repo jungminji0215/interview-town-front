@@ -1,4 +1,5 @@
 import AnswerForm from "@/app/components/AnswerForm";
+import Answers from "@/app/components/Answers";
 import { answersAPI } from "@/services/answers";
 import { questionsAPI } from "@/services/questions";
 import React from "react";
@@ -45,25 +46,7 @@ export default async function QuestionPage({
 
       {/* 다른 사람들이 남긴 답변 목록 */}
       <section className="border border-gray-200 flex-1 overflow-y-auto p-5 rounded-xl">
-        {answers.length > 0 ? (
-          <ul className="flex flex-col gap-5">
-            {answers.map((answer) => (
-              <li
-                key={answer.id}
-                className="bg-gray-100 rounded-3xl px-4 py-2 text-sm w-fit"
-              >
-                <p className="font-content">{answer.content}</p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="flex justify-center items-center">
-            <p className="font-content py-20 text-xl text-center text-gray-400">
-              답변이 등록되지 않았습니다. <br />
-              제일 먼저 답변하는 면접자가 되어보세요!
-            </p>
-          </div>
-        )}
+        <Answers answers={answers} />
       </section>
 
       {/* 내가 답변 남기는 영역 */}

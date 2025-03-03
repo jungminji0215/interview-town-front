@@ -24,16 +24,12 @@ export const answersAPI = {
   async addAnswer(questionId: number, content: string) {
     console.log("========== addAnswer ==========");
 
-    const response = await fetch(`http://localhost:8080/answers`, {
+    await fetch(`http://localhost:8080/answers`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ questionId, content }),
     });
-
-    // const data = await response.json();
-
-    // return data;
   },
 };
