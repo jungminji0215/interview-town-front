@@ -1,7 +1,7 @@
 import { ApiResponse } from "./common";
 export type Answer = {
   id: number;
-  text: string;
+  content: string;
 };
 
 export type AnswersResponse = ApiResponse<{ answers: Answer[] }>;

@@ -51,7 +51,7 @@ export default async function QuestionPage({
                 key={answer.id}
                 className="bg-gray-100 rounded-3xl px-4 py-2 text-sm w-fit"
               >
-                <p className="font-content">{answer.text}</p>
+                <p className="font-content">{answer.content}</p>
               </li>
             ))}
           </ul>
