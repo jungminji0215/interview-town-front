@@ -46,13 +46,12 @@ export default async function QuestionPage({
 
       {/* 다른 사람들이 남긴 답변 목록 */}
       <section className="border border-gray-200 flex-1 overflow-y-auto p-5 rounded-xl">
-        <Answers answers={answers} />
+        <Answers answers={answers} questionId={Number(slug)} />
       </section>
 
       {/* 내가 답변 남기는 영역 */}
       <section className="flex items-center">
         <AnswerForm questionId={question.id} />
-        {/* <Image src={"/answer.svg"} width={80} height={80} alt="interview" /> */}
       </section>
     </section>
   );

@@ -6,14 +6,19 @@ import { io } from "socket.io-client";
 
 type Props = {
   answers: Answer[];
+  questionId: number;
 };
 
-export default function Answers({ answers }: Props) {
+export default function Answers({ answers, questionId }: Props) {
   const [realtimeAnswer, setRealtimeAnswer] = useState(answers);
 
   useEffect(() => {
     const socket = io("http://localhost:8080");
 
+    // 클라이언트가 특정 질문의 룸에 참여하도록 요청
+    socket.emit("joinRoom", questionId);
+
+    // "newAnswer" 이벤트를 수신하면 상태 업데이트
     socket.on("newAnswer", (newAnswer) => {
       setRealtimeAnswer((prev) => [...prev, newAnswer]);
     });
@@ -21,7 +26,7 @@ export default function Answers({ answers }: Props) {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [questionId]);
 
   return (
     <>
