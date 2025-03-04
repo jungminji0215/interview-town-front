@@ -1,5 +1,5 @@
-import AnswerForm from "@/app/components/AnswerForm";
-import Answers from "@/app/components/Answers";
+import AnswerForm from "@/components/AnswerForm";
+import Answers from "@/components/Answers";
 import { answersAPI } from "@/services/answers";
 import { questionsAPI } from "@/services/questions";
 import React from "react";

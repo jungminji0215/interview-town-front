@@ -1,7 +1,7 @@
 import { categoriesAPI } from "@/services/categories";
 
 import { tagsAPI } from "@/services/tags";
-import HomeClient from "./components/HomeClient";
+import HomeClient from "../components/HomeClient";
 import { questionsAPI } from "@/services/questions";
 
 export default async function Home({
