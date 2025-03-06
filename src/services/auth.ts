@@ -1,0 +1,77 @@
+"use server";
+
+import { ROUTES } from "@/constants/routes";
+import { redirect } from "next/navigation";
+import { z } from "zod";
+
+// TODO 파일 분리
+const baseAuthSchema = z.object({
+  // TODO 조건 수정
+  userId: z.string().min(1, { message: "아이디는 1글자 이상" }).trim(),
+  password: z.string().min(1, { message: "비밀번호는 1글자 이상" }).trim(),
+});
+
+const loginSchema = baseAuthSchema;
+
+const signUpSchema = baseAuthSchema.extend({
+  nickname: z.string().min(1, { message: "닉네임은 1글자 이상" }).trim(),
+});
+
+export const signUp = async (prevState, formData: FormData) => {
+  console.log("========== login ==========");
+
+  const result = signUpSchema.safeParse(Object.fromEntries(formData));
+
+  if (!result.success) {
+    return {
+      errors: result.error.flatten().fieldErrors,
+    };
+  }
+
+  const { userId, password, nickname } = result.data;
+
+  const response = await fetch("http://localhost:8080/auth/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId, password, nickname }),
+  });
+
+  const data = await response.json();
+
+  console.log("data :>> ", data);
+
+  redirect(ROUTES.LOGIN);
+};
+
+export const login = async (prevState, formData: FormData) => {
+  console.log("========== login ==========");
+
+  // 유효성 검사
+  const result = loginSchema.safeParse(Object.fromEntries(formData));
+
+  if (!result.success) {
+    return {
+      errors: result.error.flatten().fieldErrors,
+    };
+  }
+
+  const { userId, password } = result.data;
+
+  // 로그인 요청
+  const response = await fetch("http://localhost:8080/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({ userId, password }),
+  });
+
+  const data = await response.json();
+  console.log("data :>> ", data);
+  return data;
+};
+
+export const logout = async () => {};
