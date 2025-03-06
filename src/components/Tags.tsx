@@ -19,11 +19,11 @@ export default function Tags({ tags, selected, onSelectTag }: Props) {
             <li
               onClick={() => onSelectTag(tag.name)}
               key={tag.id}
-              className={`border-3 border-secondary flex items-center rounded-full px-3 hover:scale-110 cursor-pointer ${
-                selected === tag.name ? "bg-secondary" : "bg-white"
+              className={`flex items-center rounded-md px-2 hover:scale-110 cursor-pointer ${
+                selected === tag.name ? "bg-secondary" : "bg-gray-200"
               }`}
             >
-              <p className="text-sm font-title">{tag.name}</p>
+              <p className="text-sm font-title">#{tag.name}</p>
             </li>
           );
         })}

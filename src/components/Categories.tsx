@@ -23,8 +23,8 @@ export default function Categories({
             <li
               onClick={() => onSelectCategory(category.name)}
               key={category.id}
-              className={`border-3 border-secondary flex items-center rounded-full px-3 hover:scale-110 cursor-pointer ${
-                selected === category.name ? "bg-secondary" : "bg-white"
+              className={`flex items-center rounded-full px-3 hover:scale-110 cursor-pointer ${
+                selected === category.name ? "bg-secondary" : "bg-gray-200"
               }`}
             >
               <p className="text-lg font-title">{category.name}</p>
