@@ -2,6 +2,6 @@ export const ROUTES = {
   HOME: "/",
   QUESTION: "/question",
   CONTACT: "/contact",
-  LOGIN: "/login",
-  SIGN_UP: "/sign-up",
+  LOGIN: "/auth/login",
+  SIGN_UP: "/auth/sign-up",
 };
