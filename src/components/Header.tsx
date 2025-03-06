@@ -16,7 +16,9 @@ export default function Header() {
               <Link href={ROUTES.CONTACT}>이메일 문의</Link>
             </li> */}
             <li>
-              <Link href={ROUTES.LOGIN}>로그인</Link>
+              <Link href={ROUTES.LOGIN}>
+                <span className="font-title text-lg">로그인</span>
+              </Link>
             </li>
           </ul>
           <button aria-label="다크 모드 전환">
