@@ -1,3 +1,4 @@
+import LoginForm from "@/components/LoginForm";
 import { ROUTES } from "@/constants/routes";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,16 +11,7 @@ export default function LoginPage() {
         <div className="text-center pt-3 pb-5 text-2xl font-title">로그인</div>
 
         {/* 로그인 Form */}
-        <form className=" flex flex-col gap-3">
-          <input type="email" className="border-2 rounded-md p-2"></input>
-          <input type="password" className="border-2 rounded-md p-2"></input>
-          <button
-            type="submit"
-            className="rounded-md p-2 bg-secondary font-content"
-          >
-            로그인
-          </button>
-        </form>
+        <LoginForm />
 
         <div className="flex items-center  gap-2 my-4">
           <div className="flex-1 border-t border-gray-300"></div>
