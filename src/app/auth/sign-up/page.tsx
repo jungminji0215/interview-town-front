@@ -1,3 +1,4 @@
+import SignUpForm from "@/components/SignUpForm";
 import { ROUTES } from "@/constants/routes";
 import Link from "next/link";
 import React from "react";
@@ -13,18 +14,7 @@ export default function SignUpPage() {
           회원 가입
         </div>
 
-        {/* 로그인 Form */}
-        <form className=" flex flex-col gap-3">
-          {/* TODO input 공통 컴포넌트 */}
-          <input type="email" className="border-2 rounded-md p-2"></input>
-          <input type="password" className="border-2 rounded-md p-2"></input>
-          <button
-            type="submit"
-            className="rounded-md p-2 bg-secondary font-content"
-          >
-            회원 가입
-          </button>
-        </form>
+        <SignUpForm />
 
         {/* 로그인 페이지 이동 버튼 */}
         <div className="flex justify-center items-center gap-2 py-1 pt-5">
