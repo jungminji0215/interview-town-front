@@ -1,11 +1,23 @@
 "use client";
 
 import { login } from "@/services/auth";
-import React, { useActionState } from "react";
+import React, { useActionState, useEffect } from "react";
 import SubmitButton from "./SubmitButton";
+import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
   const [state, loginAction] = useActionState(login, undefined);
+
+  // TODO 임시
+  const router = useRouter();
+  useEffect(() => {
+    if (state?.data?.token) {
+      console.log("state?.data?.token :>> ", state?.data?.token);
+      localStorage.setItem("accessToken", state.data.token);
+
+      router.push("/");
+    }
+  }, [state, router]);
 
   return (
     <form className="flex flex-col gap-3" action={loginAction}>

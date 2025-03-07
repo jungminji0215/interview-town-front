@@ -65,12 +65,37 @@ export const login = async (prevState, formData: FormData) => {
     headers: {
       "Content-Type": "application/json",
     },
-
+    credentials: "include", // TODO 나중에 refresh token 테스트
     body: JSON.stringify({ userId, password }),
   });
 
   const data = await response.json();
-  console.log("data :>> ", data);
+
+  return data;
+};
+
+export const getSession = async (token: string) => {
+  // TODO 임시 -> 쿠키에서 조회하는 것으로 변경
+  if (!token) {
+    return null;
+  }
+
+  /** 토큰 검증 하고 새 토큰 발습 */
+  const response = await fetch("http://localhost:8080/auth/session", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch session");
+  }
+
+  const data = await response.json();
+
   return data;
 };
 
