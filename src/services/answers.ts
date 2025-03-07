@@ -11,7 +11,9 @@ export const answersAPI = {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`,
         },
+
         cache: "no-store",
       }
     );
@@ -21,13 +23,14 @@ export const answersAPI = {
     return data;
   },
 
-  async addAnswer(questionId: number, content: string) {
+  async addAnswer(questionId: number, content: string, token: string) {
     console.log("========== addAnswer ==========");
 
     await fetch(`http://localhost:8080/answers`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ questionId, content }),
     });

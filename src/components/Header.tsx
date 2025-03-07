@@ -39,9 +39,9 @@ export default function Header() {
                   </span>
                 </li>
                 <li>
-                  <Link href={ROUTES.LOGIN}>
-                    <span className="font-title text-lg">로그아웃</span>
-                  </Link>
+                  {/* <Link href={ROUTES.LOGIN}> */}
+                  <span className="font-title text-lg">로그아웃</span>
+                  {/* </Link> */}
                 </li>
               </>
             ) : (
