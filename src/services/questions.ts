@@ -1,5 +1,4 @@
 export const questionsAPI = {
-  // TODO error handling
   async getQuestions(category: string) {
     console.log("========== getQuestions ==========");
 
@@ -13,6 +12,7 @@ export const questionsAPI = {
         cache: "no-store",
       }
     );
+
     const data = await response.json();
 
     return data;

@@ -13,6 +13,7 @@ export const categoriesAPI = {
         cache: "no-store",
       }
     );
+
     const data = await response.json();
 
     return data;

@@ -1,5 +1,4 @@
 export const tagsAPI = {
-  // TODO error handling
   async getTagsByCategory(category: string) {
     console.log("========== getTagsByCategory ==========");
 
@@ -13,6 +12,7 @@ export const tagsAPI = {
         cache: "no-store",
       }
     );
+
     const data = await response.json();
 
     return data;
