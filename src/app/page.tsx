@@ -4,16 +4,18 @@ import { tagsAPI } from "@/services/tags";
 import HomeClient from "../components/HomeClient";
 import { questionsAPI } from "@/services/questions";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Record<string, string | string[] | undefined>;
-}) {
-  const category =
-    typeof searchParams.category === "string"
-      ? searchParams.category
-      : "frontend";
-  const tag = typeof searchParams.tag === "string" ? searchParams.tag : "all";
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+export default async function Home(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams;
+
+  const category = Array.isArray(searchParams.category)
+    ? searchParams.category[0]
+    : searchParams.category ?? "frontend";
+
+  const tag = Array.isArray(searchParams.tag)
+    ? searchParams.tag[0]
+    : searchParams.tag ?? "all";
 
   const {
     data: { categories },
