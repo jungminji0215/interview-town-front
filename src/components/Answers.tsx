@@ -34,7 +34,7 @@ export default function Answers({ answers, questionId }: Props) {
   console.log("data :>> ", data?.data?.user);
 
   useEffect(() => {
-    const socket = io("http://localhost:8080");
+    const socket = io("http://localhost:80");
 
     // 클라이언트가 특정 질문의 룸에 참여하도록 요청
     socket.emit("joinRoom", questionId);

@@ -30,13 +30,16 @@ export const signUp = async (prevState, formData: FormData) => {
 
   const { userId, password, nickname } = result.data;
 
-  const response = await fetch("http://localhost:8080/auth/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ userId, password, nickname }),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId, password, nickname }),
+    }
+  );
 
   const data = await response.json();
 
@@ -60,14 +63,17 @@ export const login = async (prevState, formData: FormData) => {
   const { userId, password } = result.data;
 
   // 로그인 요청
-  const response = await fetch("http://localhost:8080/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include", // TODO 나중에 refresh token 테스트
-    body: JSON.stringify({ userId, password }),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // TODO 나중에 refresh token 테스트
+      body: JSON.stringify({ userId, password }),
+    }
+  );
 
   const data = await response.json();
 
@@ -81,14 +87,17 @@ export const getSession = async (token: string) => {
   }
 
   /** 토큰 검증 하고 새 토큰 발습 */
-  const response = await fetch("http://localhost:8080/auth/session", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-    credentials: "include",
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/session`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include",
+    }
+  );
 
   if (!response.ok) {
     throw new Error("Failed to fetch session");

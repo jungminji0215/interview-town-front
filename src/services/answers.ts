@@ -6,7 +6,7 @@ export const answersAPI = {
     console.log("========== getAnswer by questionId==========");
 
     const response = await fetch(
-      `http://localhost:8080/answers?questionId=${questionId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/answers?questionId=${questionId}`,
       {
         method: "GET",
         headers: {
@@ -26,7 +26,7 @@ export const answersAPI = {
   async addAnswer(questionId: number, content: string, token: string) {
     console.log("========== addAnswer ==========");
 
-    await fetch(`http://localhost:8080/answers`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_URL}/answers`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

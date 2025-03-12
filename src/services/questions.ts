@@ -4,7 +4,7 @@ export const questionsAPI = {
     console.log("========== getQuestions ==========");
 
     const response = await fetch(
-      `http://localhost:8080/questions?category=${category}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/questions?category=${category}`,
       {
         method: "GET",
         headers: {
@@ -22,7 +22,7 @@ export const questionsAPI = {
     console.log("========== getQuestion by Id==========");
 
     const response = await fetch(
-      `http://localhost:8080/questions/${questionId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/questions/${questionId}`,
       {
         method: "GET",
         headers: {
