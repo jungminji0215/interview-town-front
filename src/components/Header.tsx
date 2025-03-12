@@ -17,7 +17,7 @@ export default function Header() {
     }
   }, []);
 
-  const { data, isLoading, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ["session", token],
     queryFn: () => getSession(token!),
     enabled: !!token,

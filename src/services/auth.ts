@@ -17,7 +17,7 @@ const signUpSchema = baseAuthSchema.extend({
   nickname: z.string().min(1, { message: "닉네임은 1글자 이상" }).trim(),
 });
 
-export const signUp = async (prevState, formData: FormData) => {
+export const signUp = async (prevState: unknown, formData: FormData) => {
   console.log("========== login ==========");
 
   const result = signUpSchema.safeParse(Object.fromEntries(formData));
@@ -48,7 +48,7 @@ export const signUp = async (prevState, formData: FormData) => {
   redirect(ROUTES.LOGIN);
 };
 
-export const login = async (prevState, formData: FormData) => {
+export const login = async (prevState: unknown, formData: FormData) => {
   console.log("========== login ==========");
 
   // 유효성 검사

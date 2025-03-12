@@ -1,8 +1,8 @@
 "use client";
 
 import { answersAPI } from "@/services/answers";
-import { getSession } from "@/services/auth";
-import { useQuery } from "@tanstack/react-query";
+// import { getSession } from "@/services/auth";
+// import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 
 export default function AnswerForm({ questionId }: { questionId: number }) {
@@ -16,11 +16,11 @@ export default function AnswerForm({ questionId }: { questionId: number }) {
     }
   }, []);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["session", token],
-    queryFn: () => getSession(token!),
-    enabled: !!token,
-  });
+  // const { data, isLoading, error } = useQuery({
+  //   queryKey: ["session", token],
+  //   queryFn: () => getSession(token!),
+  //   enabled: !!token,
+  // });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
