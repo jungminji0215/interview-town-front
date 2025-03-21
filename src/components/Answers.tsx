@@ -1,8 +1,6 @@
 "use client";
 
-import { getSession } from "@/services/auth";
 import { RealtimeAnswer } from "@/types/answer";
-import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
@@ -14,32 +12,9 @@ type Props = {
 export default function Answers({ answers, questionId }: Props) {
   const [realtimeAnswer, setRealtimeAnswer] = useState(answers);
 
-  console.log("realtimeAnswer :>> ", realtimeAnswer);
-
-  // TODO 임시
-  const [token, setToken] = useState<string | null>(null);
   useEffect(() => {
-    const localStorageToken = localStorage.getItem("accessToken");
-    if (localStorageToken) {
-      setToken(localStorageToken);
-    }
-  }, []);
-
-  const { data } = useQuery({
-    queryKey: ["session", token],
-    queryFn: () => getSession(token!),
-    enabled: !!token,
-  });
-
-  console.log("data :>> ", data?.data?.user);
-
-  useEffect(() => {
-    const socket = io("http://localhost:80");
-
-    // 클라이언트가 특정 질문의 룸에 참여하도록 요청
+    const socket = io(process.env.NEXT_PUBLIC_API_URL);
     socket.emit("joinRoom", questionId);
-
-    // "newAnswer" 이벤트를 수신하면 상태 업데이트
     socket.on("newAnswer", (newAnswer) => {
       setRealtimeAnswer((prev) => [...prev, newAnswer]);
     });
@@ -54,16 +29,10 @@ export default function Answers({ answers, questionId }: Props) {
       {realtimeAnswer.length > 0 ? (
         <ul className="flex flex-col gap-5">
           {realtimeAnswer.map((answer) => {
-            const isCurrentUser = data?.data?.user?.id === answer.user_id;
-
             return (
               <li
                 key={answer.id}
-                className={`rounded-3xl px-4 py-2 text-sm w-fit ${
-                  isCurrentUser
-                    ? "self-end bg-gray-300"
-                    : "self-start bg-gray-100"
-                }`}
+                className={"rounded-3xl px-4 py-2 text-sm w-fit bg-gray-100"}
               >
                 <p className="font-content">{answer.content}</p>
               </li>

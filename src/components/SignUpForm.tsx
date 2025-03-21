@@ -6,7 +6,6 @@ import { signUp } from "@/services/auth";
 
 /* TODO input 공통 컴포넌트 */
 export default function SignUpForm() {
-  // { data: { nickname: 'tt' } }
   const [state, signUpAction] = useActionState(signUp, undefined);
 
   return (

@@ -19,7 +19,6 @@ export default function RootLayout({
         <Providers>
           <HeaderWrapper />
           <main className="flex-1 overflow-y-auto">{children}</main>
-          {/* <Footer /> */}
         </Providers>
       </body>
     </html>

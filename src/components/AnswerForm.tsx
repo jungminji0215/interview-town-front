@@ -1,30 +1,15 @@
 "use client";
 
 import { answersAPI } from "@/services/answers";
-// import { getSession } from "@/services/auth";
-// import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+
+import React, { useState } from "react";
 
 export default function AnswerForm({ questionId }: { questionId: number }) {
   const [content, setContent] = useState<string>("");
 
-  const [token, setToken] = useState<string | null>(null);
-  useEffect(() => {
-    const localStorageToken = localStorage.getItem("accessToken");
-    if (localStorageToken) {
-      setToken(localStorageToken);
-    }
-  }, []);
-
-  // const { data, isLoading, error } = useQuery({
-  //   queryKey: ["session", token],
-  //   queryFn: () => getSession(token!),
-  //   enabled: !!token,
-  // });
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await answersAPI.addAnswer(questionId, content, token!);
+    await answersAPI.addAnswer(questionId, content);
     setContent("");
   };
 
