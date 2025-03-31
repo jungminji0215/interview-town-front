@@ -10,29 +10,29 @@ type Props = {
 };
 
 export default function Answers({ answers, questionId }: Props) {
-  const [realtimeAnswer, setRealtimeAnswer] = useState(answers);
+  // const [realtimeAnswer, setRealtimeAnswer] = useState(answers);
 
-  useEffect(() => {
-    const socket = io(process.env.NEXT_PUBLIC_API_URL);
-    socket.emit("joinRoom", questionId);
-    socket.on("newAnswer", (newAnswer) => {
-      setRealtimeAnswer((prev) => [...prev, newAnswer]);
-    });
+  // useEffect(() => {
+  //   const socket = io(process.env.NEXT_PUBLIC_API_URL);
+  //   socket.emit("joinRoom", questionId);
+  //   socket.on("newAnswer", (newAnswer) => {
+  //     setRealtimeAnswer((prev) => [...prev, newAnswer]);
+  //   });
 
-    return () => {
-      socket.disconnect();
-    };
-  }, [questionId]);
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, [questionId]);
 
   return (
     <>
-      {realtimeAnswer.length > 0 ? (
+      {answers.length > 0 ? (
         <ul className="flex flex-col gap-5">
-          {realtimeAnswer.map((answer) => {
+          {answers.map((answer) => {
             return (
               <li
                 key={answer.id}
-                className={"rounded-3xl px-4 py-2 text-sm w-fit bg-gray-100"}
+                className={"rounded-lg px-4 py-2 text-sm  bg-gray-100"}
               >
                 <p className="font-content">{answer.content}</p>
               </li>

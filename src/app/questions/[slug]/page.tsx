@@ -1,6 +1,6 @@
 import AnswerForm from "@/components/AnswerForm";
 import Answers from "@/components/Answers";
-import { answersAPI } from "@/services/answers";
+import { getAnswers } from "@/services/answers";
 import { questionsAPI } from "@/services/questions";
 import React from "react";
 
@@ -17,7 +17,7 @@ export default async function QuestionPage({
 
   const {
     data: { answers },
-  } = await answersAPI.getAnswers(Number(slug));
+  } = await getAnswers(Number(slug));
 
   return (
     <section className="max-w-5xl mx-auto py-5 px-5 flex flex-col h-full gap-3">
@@ -26,7 +26,7 @@ export default async function QuestionPage({
         className="flex gap-5 items-center"
       >
         {/* <Image src={"/interview.png"} width={70} height={70} alt="interview" /> */}
-        <div className="bg-secondary py-3 px-5 rounded-xl w-full">
+        <div className="bg-secondary py-3 px-5 rounded-lg w-full">
           <h1 id="question-heading" className="sr-only">
             면접 질문
           </h1>
@@ -44,14 +44,14 @@ export default async function QuestionPage({
         </h2>
       </section>
 
-      {/* 다른 사람들이 남긴 답변 목록 */}
-      <section className="border border-gray-200 flex-1 overflow-y-auto p-5 rounded-xl">
-        <Answers answers={answers} questionId={Number(slug)} />
-      </section>
-
       {/* 내가 답변 남기는 영역 */}
       <section className="flex items-center">
         <AnswerForm questionId={question.id} />
+      </section>
+
+      {/* 다른 사람들이 남긴 답변 목록 */}
+      <section className="py-5">
+        <Answers answers={answers} questionId={Number(slug)} />
       </section>
     </section>
   );
