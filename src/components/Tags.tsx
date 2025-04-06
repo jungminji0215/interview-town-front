@@ -11,7 +11,7 @@ export default function Tags({ tags, selected, onSelectTag }: Props) {
   return (
     <>
       <h2 id="tags-heading" className="text-gray-400 text-xs">
-        태그
+        기술
       </h2>
       <ul className="flex gap-3 py-2">
         {tags.map((tag) => {
