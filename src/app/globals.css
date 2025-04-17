@@ -1,48 +1,46 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
-  font-family: "1973MimiWorldR";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.1/1973MimiWorldR.woff")
-    format("woff");
+  font-family: '1973MimiWorldR';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.1/1973MimiWorldR.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "SBAggroB";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff")
-    format("woff");
+  font-family: 'SBAggroB';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "HakgyoansimGeurimilgiTTF-R";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimGeurimilgiTTF-R.woff2")
-    format("woff2");
+  font-family: 'HakgyoansimGeurimilgiTTF-R';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimGeurimilgiTTF-R.woff2')
+    format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
+/* 버튼/태그	#E0E7FF 배경 + #4338CA 텍스트*/
 @theme {
-  /* --color-background: var(--background);
-  --color-foreground: var(--foreground); */
-  --color-primary: var(--color-serenity);
-  --color-secondary: var(--color-rose-quartz);
+  --color-primary: #4338ca;
+  /*--color-secondary: var(--color-rose-quartz);*/
+  --color-secondary: #e0e7ff;
 
-  --font-logo: "SBAggroB";
-  --font-title: "1973MimiWorldR";
-  --font-content: "HakgyoansimGeurimilgiTTF-R";
+  /* 회백색*/
+  --color-light-gray: #f9fafb;
+
+  /*짙은 남색 (다크 네이비)*/
+  --color-dark-navy: #111827;
+
+  --font-logo: 'SBAggroB';
+  --font-title: '1973MimiWorldR';
+  --font-content: 'HakgyoansimGeurimilgiTTF-R';
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -53,23 +51,13 @@
   }
 }
 
-:root {
-  /* --background: #ffffff;
-  --foreground: #171717; */
-
-  --color-rose-quartz: #f8cacc;
-  --color-serenity: #8da4d0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --background: #0a0a0a;
-    --foreground: #ededed; */
+@layer components {
+  .wrapper {
+    @apply mx-auto max-w-5xl p-5;
   }
 }
 
-body {
-  /* color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif; */
+:root {
+  --color-rose-quartz: #f8cacc;
+  --color-serenity: #8da4d0;
 }

@@ -1,43 +1,14 @@
-import { categoriesAPI } from "@/services/categories";
+import Link from 'next/link';
 
-import { tagsAPI } from "@/services/tags";
-import HomeClient from "../components/HomeClient";
-import { questionsAPI } from "@/services/questions";
-
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
-
-export default async function Home(props: { searchParams: SearchParams }) {
-  const searchParams = await props.searchParams;
-
-  const category = Array.isArray(searchParams.category)
-    ? searchParams.category[0]
-    : searchParams.category ?? "frontend";
-
-  const tag = Array.isArray(searchParams.tag)
-    ? searchParams.tag[0]
-    : searchParams.tag ?? "all";
-
-  const {
-    data: { categories },
-  } = await categoriesAPI.getCategories();
-
-  const {
-    data: { tags },
-  } = await tagsAPI.getTagsByCategory(category);
-
-  const {
-    data: { questions },
-  } = await questionsAPI.getQuestions(category);
-
+export default async function HomePage() {
   return (
-    <section className="max-w-5xl mx-auto py-5 px-5">
-      <HomeClient
-        categories={categories}
-        tags={tags}
-        initialQuestions={questions}
-        currentCategory={category}
-        currentTag={tag}
-      />
-    </section>
+    <div className="mx-auto max-w-6xl p-5">
+      <p>여기저기 훝어져 있는 면접 질문 매번 찾기 번거로우셨나요?</p>
+      <p>연습은 했는데, 잘 준비하고 있는지 고민된적 있으신가요?</p>
+      <p>면접 질문 이제 찾아다니지 마세요!</p>
+      <p>면접 타운에서 면접 질문 목록을 확인하고</p>
+      <p>면접 준비하는 동료가 어떻게 답변하는지 확인해보세요!</p>
+      <Link href="/questions">질문 보러가기</Link>
+    </div>
   );
 }

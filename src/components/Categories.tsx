@@ -1,37 +1,17 @@
-import { Category } from "@/types/category";
-import React from "react";
+import { fetchCategories } from '@/api/fetchCategories';
+import CategoryItem from '@/components/CategoryItem';
 
-type Props = {
-  categories: Category[];
-  selected: string;
-  onSelectCategory: (category: string) => void;
-};
+export default async function Categories() {
+  const categories = await fetchCategories();
+  const allCategories = [{ id: 0, name: 'all' }, ...categories];
 
-export default function Categories({
-  categories,
-  selected,
-  onSelectCategory,
-}: Props) {
   return (
-    <>
-      <h2 id="categories-heading" className="text-gray-400 text-xs">
-        직무 선택
-      </h2>
-      <ul className="flex gap-3 py-2 ">
-        {categories.map((category) => {
-          return (
-            <li
-              onClick={() => onSelectCategory(category.name)}
-              key={category.id}
-              className={`flex items-center rounded-full px-3 hover:scale-110 cursor-pointer ${
-                selected === category.name ? "bg-secondary" : "bg-gray-200"
-              }`}
-            >
-              <p className="text-lg font-title">{category.name}</p>
-            </li>
-          );
-        })}
+    <nav className="wrapper">
+      <ul className="flex gap-3 py-2">
+        {allCategories.map((category) => (
+          <CategoryItem key={category.id} category={category} />
+        ))}
       </ul>
-    </>
+    </nav>
   );
 }

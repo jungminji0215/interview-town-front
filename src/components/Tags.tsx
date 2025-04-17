@@ -1,29 +1,26 @@
-import { Tag } from "@/types/tag";
-import React from "react";
+import { Tag } from '@/types/tag';
+import React from 'react';
 
 type Props = {
   tags: Tag[];
   selected: string;
-  onSelectTag: (tag: string) => void;
+  onSelect: (tag: string) => void;
 };
 
-export default function Tags({ tags, selected, onSelectTag }: Props) {
+export default function Tags({ tags, selected, onSelect }: Props) {
   return (
     <>
-      <h2 id="tags-heading" className="text-gray-400 text-xs">
-        기술
-      </h2>
       <ul className="flex gap-3 py-2">
         {tags.map((tag) => {
           return (
             <li
-              onClick={() => onSelectTag(tag.name)}
+              onClick={() => onSelect(tag.name)}
               key={tag.id}
-              className={`flex items-center rounded-md px-2 hover:scale-110 cursor-pointer ${
-                selected === tag.name ? "bg-secondary" : "bg-gray-200"
+              className={`flex cursor-pointer items-center rounded-md px-2 hover:scale-110 ${
+                selected === tag.name ? 'bg-blue-700' : 'bg-gray-600'
               }`}
             >
-              <p className="text-sm font-title">#{tag.name}</p>
+              <p className="font-title text-sm">#{tag.name}</p>
             </li>
           );
         })}
