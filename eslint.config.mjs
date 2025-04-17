@@ -10,7 +10,23 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-];
+  ...compat.config({
+    extends: ['next/core-web-vitals', 'next/typescript', 'prettier'],
+  }),
 
+  {
+    rules: {
+      // unused import 제거
+      'unused-imports/no-unused-imports': 'warn',
+      'unused-imports/no-unused-vars': ['warn', { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' }],
+
+      // import 정렬
+      'simple-import-sort/imports': 'warn',
+      'simple-import-sort/exports': 'warn',
+
+      // tailwind class 정렬
+      'tailwindcss/classnames-order': 'warn',
+    },
+  },
+];
 export default eslintConfig;
