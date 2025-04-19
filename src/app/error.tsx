@@ -1,29 +1,26 @@
-'use client'; // Error boundaries must be Client Components
+'use client';
+import { useRouter } from 'next/navigation';
 
-import { useEffect } from 'react';
+import React, { startTransition, useEffect } from 'react';
 
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export default function Error({ error, reset }: { error: Error; reset: () => void }) {
+  const router = useRouter();
+
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
+    console.error(error.message);
   }, [error]);
-
   return (
     <div>
-      <h2>Something went wrong!</h2>
+      <h3>오류가 발생했습니다</h3>
       <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
+        onClick={() => {
+          startTransition(() => {
+            router.refresh();
+            reset();
+          });
+        }}
       >
-        예상치 못한 오류가 발생!!
+        다시 시도
       </button>
     </div>
   );
