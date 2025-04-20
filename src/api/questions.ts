@@ -1,15 +1,17 @@
 import { notFound } from 'next/navigation';
-import { delay } from '@/utils/delay';
 
-export const fetchAllQuestions = async (page: number = 1) => {
-  await delay(5000);
+export const fetchQuestions = async (page: number, category?: string) => {
+  const params = new URLSearchParams();
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/questions?page=${page}`, {
-    cache: 'no-store',
-  });
+  params.set('page', String(page));
 
-  console.log('response : ', response);
+  if (category && category !== 'all') {
+    params.set('category', category);
+  }
 
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/questions?${params.toString()}`;
+
+  const response = await fetch(url, { cache: 'no-store' });
   if (!response.ok) {
     if (response.status === 404) {
       notFound();

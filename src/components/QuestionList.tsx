@@ -1,13 +1,14 @@
 import Pagination from '@/components/Pagination';
-import { fetchAllQuestions } from '@/api/questions';
+import { fetchQuestions } from '@/api/questions';
 import CategoryItems from '@/components/CategoryItems';
 
 type Props = {
   page: number;
+  category?: string;
 };
 
-export default async function QuestionList({ page }: Props) {
-  const response = await fetchAllQuestions(page);
+export default async function QuestionList({ page, category }: Props) {
+  const response = await fetchQuestions(page, category);
 
   return (
     <>

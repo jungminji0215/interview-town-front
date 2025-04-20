@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 type Props = {
   currentPage: number;
@@ -10,8 +10,7 @@ type Props = {
 };
 
 export default function Pagination({ currentPage, totalPages, visibleCount = 5 }: Props) {
-  const searchParams = useSearchParams();
-  const category = searchParams.get('category');
+  const { category } = useParams();
 
   const half = Math.floor(visibleCount / 2);
   let startPage = Math.max(currentPage - half, 1);
