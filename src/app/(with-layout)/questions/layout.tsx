@@ -1,15 +1,12 @@
-import React, { ReactNode, Suspense } from 'react';
+import React, { ReactNode } from 'react';
 
-import Categories from '@/components/Categories';
-import CategoriesSkeleton from '@/components/skeleton/CategoriesSkeleton';
+import CategoryList from '@/components/CategoryList';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <>
-      <Suspense fallback={<CategoriesSkeleton />}>
-        <Categories />
-      </Suspense>
+    <div className="wrapper">
+      <CategoryList />
       {children}
-    </>
+    </div>
   );
 }

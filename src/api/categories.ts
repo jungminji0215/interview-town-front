@@ -2,11 +2,11 @@ import { Category } from '@/types/category';
 import { notFound } from 'next/navigation';
 import { delay } from '@/utils/delay';
 
-export async function fetchCategories(): Promise<Category[]> {
+export const fetchCategories = async (): Promise<Category[]> => {
   await delay(2000);
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`, {
-    next: { revalidate: 5 },
+    next: { revalidate: 5 }, // TODO 하루로 변경
   });
 
   if (!response.ok) {
@@ -21,4 +21,4 @@ export async function fetchCategories(): Promise<Category[]> {
   }: { data: { categories: Category[] } } = await response.json();
 
   return categories;
-}
+};

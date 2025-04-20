@@ -1,7 +1,9 @@
-import { Tag } from "./tag";
-
 export type Question = {
   id: number;
   title: string;
-  tag: Tag;
+  content: string;
+  category: {
+    id: number;
+    name: string;
+  };
 };

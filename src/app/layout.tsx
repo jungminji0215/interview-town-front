@@ -18,8 +18,8 @@ export default function RootLayout({
       {/* TODO 글로벌 스타일 */}
       <body className="bg-dark-navy text-white">
         <Header />
-        {/*<main className="flex-1 overflow-y-auto">{children}</main>*/}
-        <main>{children}</main>
+        <main className="flex-1 overflow-y-auto">{children}</main>
+        {/*<main>{children}</main>*/}
       </body>
     </html>
   );
