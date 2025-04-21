@@ -3,9 +3,13 @@
 // import { getAnswers } from '@/services/answers';
 // import { questionsAPI } from '@/services/questions';
 import React from 'react';
+import QuestionDetail from '@/components/QuestionDetail';
+import AnswerList from '@/components/AnswerList';
 
-export default async function QuestionPage({ params }: { params: Promise<{ slug: string }> }) {
-  // const slug = (await params).slug;
+type Props = { params: Promise<{ id: string }> };
+
+export default async function QuestionPage({ params }: Props) {
+  const { id } = await params;
 
   // const {
   //   data: { question },
@@ -16,19 +20,8 @@ export default async function QuestionPage({ params }: { params: Promise<{ slug:
   // } = await getAnswers(Number(slug));
 
   return (
-    <section className="mx-auto flex h-full max-w-5xl flex-col gap-3 px-5 py-5">
-      {/*<section*/}
-      {/*  aria-labelledby="question-heading"*/}
-      {/*  className="flex gap-5 items-center"*/}
-      {/*>*/}
-      {/*  /!* <Image src={"/interview.png"} width={70} height={70} alt="interview" /> *!/*/}
-      {/*  <div className="bg-secondary py-3 px-5 rounded-lg w-full">*/}
-      {/*    <h1 id="question-heading" className="sr-only">*/}
-      {/*      면접 질문*/}
-      {/*    </h1>*/}
-      {/*    <p className="font-content w-full">{question.title}</p>*/}
-      {/*  </div>*/}
-      {/*</section>*/}
+    <div className="wrapper">
+      <QuestionDetail id={Number(id)} />
       {/*/!* 답변 유도 설명글 *!/*/}
       {/*<section*/}
       {/*  aria-labelledby="explanation-heading"*/}
@@ -46,7 +39,7 @@ export default async function QuestionPage({ params }: { params: Promise<{ slug:
       {/*<section className="py-5">*/}
       {/*  <Answers answers={answers} questionId={Number(slug)} />*/}
       {/*</section>*/}
-      상세 페이지
-    </section>
+      <AnswerList id={Number(id)} />
+    </div>
   );
 }

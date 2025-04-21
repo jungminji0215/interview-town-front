@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-export const fetchQuestions = async (page: number, category?: string) => {
+export const getQuestions = async (page: number, category?: string) => {
   const params = new URLSearchParams();
 
   params.set('page', String(page));
@@ -13,13 +13,24 @@ export const fetchQuestions = async (page: number, category?: string) => {
 
   const response = await fetch(url, { cache: 'no-store' });
   if (!response.ok) {
-    if (response.status === 404) {
-      notFound();
-    }
+    if (response.status === 404) notFound();
     throw new Error('질문 목록 불러오기 실패');
   }
 
   const { data } = await response.json();
+  return data;
+};
 
+export const getQuestion = async (id: number) => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/questions/${id}`, {
+    cache: 'no-store', // TODO force-cache
+  });
+
+  if (!response.ok) {
+    if (response.status === 404) notFound();
+    throw new Error('질문 상세 조회 실패');
+  }
+
+  const { data } = await response.json();
   return data;
 };

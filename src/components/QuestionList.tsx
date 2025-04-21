@@ -1,5 +1,5 @@
 import Pagination from '@/components/Pagination';
-import { fetchQuestions } from '@/api/questions';
+import { getQuestions } from '@/api/questions';
 import CategoryItems from '@/components/CategoryItems';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default async function QuestionList({ page, category }: Props) {
-  const response = await fetchQuestions(page, category);
+  const response = await getQuestions(page, category);
 
   return (
     <>

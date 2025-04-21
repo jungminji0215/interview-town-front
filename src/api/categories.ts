@@ -2,6 +2,7 @@ import { Category } from '@/types/category';
 import { notFound } from 'next/navigation';
 import { delay } from '@/utils/delay';
 
+// TODO 함수명 변경
 export const fetchCategories = async (): Promise<Category[]> => {
   await delay(2000);
 
