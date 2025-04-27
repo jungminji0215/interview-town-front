@@ -3,12 +3,16 @@
 import { revalidatePath } from 'next/cache';
 
 export const addAnswer = async (questionId: number, content: string) => {
-  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/answers`, {
+  console.log('addAnswer');
+  console.log('questionId : ', questionId);
+  console.log(' content: ', content);
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/questions/${questionId}/answers`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ questionId, content }),
+    // TODO login 기능 생기기 전까지 userId 는 모두 1 으로 저장
+    body: JSON.stringify({ userId: 1, content }),
   });
 
   revalidatePath(`/questions/${questionId}`);

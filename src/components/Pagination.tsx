@@ -30,7 +30,7 @@ export default function Pagination({ currentPage, totalPages, visibleCount = 5 }
       {currentPage > 1 && (
         <Link
           href={createLink(currentPage - 1)}
-          className="rounded-md bg-gray-300 px-3 py-2 text-sm hover:bg-gray-400"
+          className="rounded-md bg-gray-300 px-3 py-2 text-sm text-black hover:bg-gray-400"
         >
           ◀ 이전
         </Link>
@@ -53,7 +53,7 @@ export default function Pagination({ currentPage, totalPages, visibleCount = 5 }
       {currentPage < totalPages && (
         <Link
           href={createLink(currentPage + 1)}
-          className="rounded-md bg-gray-300 px-3 py-2 text-sm hover:bg-gray-400"
+          className="rounded-md bg-gray-300 px-3 py-2 text-sm text-black hover:bg-gray-400"
         >
           다음 ▶
         </Link>

@@ -1,6 +1,6 @@
-export type RealtimeAnswer = {
+export type Answer = {
   id: number;
-  question_id: number;
-  user_id: number;
+  questionId: number;
+  userId: number;
   content: string;
 };

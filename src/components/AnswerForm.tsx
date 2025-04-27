@@ -1,27 +1,43 @@
-"use client";
+'use client';
 
-import { addAnswer } from "@/services/answers";
-import React, { useState } from "react";
+import { addAnswer } from '@/services/answers';
+import React, { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-export default function AnswerForm({ questionId }: { questionId: number }) {
-  const [content, setContent] = useState<string>("");
+type Props = { questionId: number };
+
+export default function AnswerForm({ questionId }: Props) {
+  const [content, setContent] = useState<string>('');
+
+  console.log('content : ', content);
+
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: ({ questionId, content }: { questionId: number; content: string }) =>
+      addAnswer(questionId, content),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['answers', questionId] });
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await addAnswer(questionId, content);
-    setContent("");
+    mutate({ questionId, content });
+    setContent('');
   };
 
   return (
     <form className="relative flex-1" onSubmit={handleSubmit}>
       <textarea
+        value={content}
         placeholder="여기에 답변을 입력하세요."
-        className="resize-none w-full bg-gray-100 rounded-lg px-4 py-2 text-sm pr-16"
+        className="w-full resize-none rounded-lg bg-gray-100 px-4 py-2 pr-16 text-sm text-black"
         onChange={(e) => setContent(e.target.value)}
       />
       <button
         type="submit"
-        className="absolute right-2 bottom-4 cursor-pointer rounded-lg bg-secondary font-content px-3 py-2 self-end text-sm"
+        className="font-content absolute right-2 bottom-4 cursor-pointer self-end rounded-lg bg-blue-500 px-3 py-2 text-sm"
       >
         등록
       </button>

@@ -2,11 +2,11 @@ import React from 'react';
 import { getQuestion } from '@/api/questions';
 
 type Props = {
-  id: number;
+  questionId: number;
 };
 
-export default async function QuestionDetail({ id }: Props) {
-  const question = await getQuestion(id);
+export default async function QuestionDetail({ questionId }: Props) {
+  const question = await getQuestion(questionId);
 
   return (
     <article aria-labelledby="question-title" className="rounded-md bg-white p-4 shadow-sm">

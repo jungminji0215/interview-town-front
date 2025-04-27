@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import QuestionSkeleton from '@/components/skeleton/QuestionsSkeleton';
+import QuestionSkeleton from '@/components/skeleton/QuestionListSkeleton';
 import QuestionList from '@/components/QuestionList';
 
 type Props = {
