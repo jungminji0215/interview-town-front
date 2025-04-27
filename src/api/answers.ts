@@ -1,4 +1,4 @@
-import { Answer } from '@/types/answer';
+import { AnswerResponse } from '@/types/answer';
 import { delay } from '@/utils/delay';
 
 export const getAnswers = async ({
@@ -7,7 +7,7 @@ export const getAnswers = async ({
 }: {
   pageParam?: number;
   questionId: number;
-}): Promise<Answer> => {
+}): Promise<AnswerResponse> => {
   await delay(3000);
 
   const response = await fetch(

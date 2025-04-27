@@ -1,25 +1,25 @@
 'use client';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { getAnswers } from '@/api/answers';
 import AnswerItem from './AnswerItem';
 import React from 'react';
 import Spinner from '@/components/ui/Spinner';
+import { AnswerResponse } from '@/types/answer';
 
 type Props = {
   questionId: number;
 };
 
 export default function AnswerList({ questionId }: Props) {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isError } = useInfiniteQuery({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
     queryKey: ['answers', questionId],
     queryFn: ({ pageParam }) => getAnswers({ pageParam, questionId }),
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
+    getNextPageParam: (lastPage: AnswerResponse) => {
       const { currentPage, totalPages } = lastPage.data.pagination;
       return currentPage < totalPages ? currentPage + 1 : undefined;
     },
-    suspense: true,
   });
 
   const answers = data?.pages.flatMap((page) => page.data.answers) ?? [];
