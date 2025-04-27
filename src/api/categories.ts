@@ -2,9 +2,8 @@ import { Category } from '@/types/category';
 import { notFound } from 'next/navigation';
 import { delay } from '@/utils/delay';
 
-// TODO 함수명 변경
-export const fetchCategories = async (): Promise<Category[]> => {
-  await delay(2000);
+export const getCategories = async (): Promise<Category[]> => {
+  // await delay(2000);
 
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`, {
     next: { revalidate: 5 }, // TODO 하루로 변경

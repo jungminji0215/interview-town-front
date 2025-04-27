@@ -4,6 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { getAnswers } from '@/api/answers';
 import AnswerItem from './AnswerItem';
 import { LiaSpinnerSolid } from 'react-icons/lia';
+import React from 'react';
 
 type Props = {
   questionId: number;
@@ -25,8 +26,8 @@ export default function AnswerList({ questionId }: Props) {
 
   return (
     <section aria-labelledby="answers-heading">
-      <h2 id="answers-heading" className="sr-only">
-        답변 목록
+      <h2 id="answers-heading" className="mb-4 text-xl font-semibold text-black">
+        답변
       </h2>
 
       <ul className="flex flex-col gap-5">

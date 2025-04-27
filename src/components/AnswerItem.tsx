@@ -6,7 +6,7 @@ type Props = {
 
 export default function AnswerItem({ answer }: Props) {
   return (
-    <li className="rounded bg-gray-100 p-4">
+    <li className="rounded-lg border border-gray-300 p-4">
       <p className="text-sm whitespace-pre-line text-black">{answer.content}</p>
     </li>
   );

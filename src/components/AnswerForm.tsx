@@ -9,8 +9,6 @@ type Props = { questionId: number };
 export default function AnswerForm({ questionId }: Props) {
   const [content, setContent] = useState<string>('');
 
-  console.log('content : ', content);
-
   const queryClient = useQueryClient();
 
   const { mutate, isPending, isError, error } = useMutation({
@@ -28,19 +26,21 @@ export default function AnswerForm({ questionId }: Props) {
   };
 
   return (
-    <form className="relative flex-1" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <textarea
         value={content}
         placeholder="여기에 답변을 입력하세요."
-        className="w-full resize-none rounded-lg bg-gray-100 px-4 py-2 pr-16 text-sm text-black"
+        className="w-full resize-none rounded-lg border border-gray-300 px-4 py-2 text-black"
         onChange={(e) => setContent(e.target.value)}
       />
-      <button
-        type="submit"
-        className="font-content absolute right-2 bottom-4 cursor-pointer self-end rounded-lg bg-blue-500 px-3 py-2 text-sm"
-      >
-        등록
-      </button>
+      <div className="flex justify-end">
+        <button
+          type="submit"
+          className="font-content cursor-pointer rounded-lg bg-blue-500 px-5 py-2"
+        >
+          등록
+        </button>
+      </div>
     </form>
   );
 }
