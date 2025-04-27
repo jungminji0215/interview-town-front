@@ -12,8 +12,8 @@ export const getQuestions = async (page: number, category?: string) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/questions?${params.toString()}`;
 
   const response = await fetch(url, { cache: 'no-store' });
+
   if (!response.ok) {
-    if (response.status === 404) notFound();
     throw new Error('질문 목록 불러오기 실패');
   }
 

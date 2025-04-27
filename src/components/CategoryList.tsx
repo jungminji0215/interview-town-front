@@ -1,8 +1,8 @@
-import { fetchCategories } from '@/api/categories';
+import { getCategories } from '@/api/categories';
 import CategoryItem from '@/components/CategoryItem';
 
 export default async function CategoryList() {
-  const categories = await fetchCategories();
+  const categories = await getCategories();
   const allCategories = [{ id: 0, name: 'all' }, ...categories];
 
   return (

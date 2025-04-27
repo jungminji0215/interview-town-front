@@ -1,30 +1,48 @@
-"use client";
+'use client';
 
-import { addAnswer } from "@/services/answers";
-import React, { useState } from "react";
+import { addAnswer } from '@/services/answers';
+import React, { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Spinner from '@/components/ui/Spinner';
 
-export default function AnswerForm({ questionId }: { questionId: number }) {
-  const [content, setContent] = useState<string>("");
+type Props = { questionId: number };
+
+export default function AnswerForm({ questionId }: Props) {
+  const [content, setContent] = useState<string>('');
+
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending, isError, error } = useMutation({
+    mutationFn: ({ questionId, content }: { questionId: number; content: string }) =>
+      addAnswer(questionId, content),
+    onSuccess: () => {
+      setContent('');
+      queryClient.invalidateQueries({ queryKey: ['answers', questionId] });
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await addAnswer(questionId, content);
-    setContent("");
+    mutate({ questionId, content });
   };
 
   return (
-    <form className="relative flex-1" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <textarea
+        value={content}
         placeholder="여기에 답변을 입력하세요."
-        className="resize-none w-full bg-gray-100 rounded-lg px-4 py-2 text-sm pr-16"
+        className="w-full resize-none rounded-lg border border-gray-300 px-4 py-2 text-black"
         onChange={(e) => setContent(e.target.value)}
       />
-      <button
-        type="submit"
-        className="absolute right-2 bottom-4 cursor-pointer rounded-lg bg-secondary font-content px-3 py-2 self-end text-sm"
-      >
-        등록
-      </button>
+      {isError && <div className="text-sm text-red-500">{error.message}</div>}
+      <div className="flex justify-end">
+        <button
+          type="submit"
+          className="font-content cursor-pointer rounded-lg bg-blue-500 px-5 py-2"
+        >
+          {isPending ? <Spinner /> : '등록'}
+        </button>
+      </div>
     </form>
   );
 }
