@@ -32,7 +32,7 @@ export default function Pagination({ currentPage, totalPages, visibleCount = 5 }
           href={createLink(currentPage - 1)}
           className="rounded-md bg-gray-300 px-3 py-2 text-sm text-black hover:bg-gray-400"
         >
-          ◀ 이전
+          ◀
         </Link>
       )}
 
@@ -42,7 +42,7 @@ export default function Pagination({ currentPage, totalPages, visibleCount = 5 }
           href={createLink(page)}
           className={`rounded-md px-4 py-2 text-sm font-medium ${
             page === currentPage
-              ? 'bg-blue-600 text-white'
+              ? 'bg-primary text-white'
               : 'bg-gray-200 text-black hover:bg-gray-300'
           }`}
         >
@@ -55,7 +55,7 @@ export default function Pagination({ currentPage, totalPages, visibleCount = 5 }
           href={createLink(currentPage + 1)}
           className="rounded-md bg-gray-300 px-3 py-2 text-sm text-black hover:bg-gray-400"
         >
-          다음 ▶
+          ▶
         </Link>
       )}
     </div>

@@ -16,12 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      {/* TODO 글로벌 스타일 */}
-      <body className="bg-dark-navy text-white">
+      <body className="font-body bg-gray-50">
         <Header />
         <Providers>
-          <main className="flex-1 overflow-y-auto">{children}</main>
-          {/*<main>{children}</main>*/}
+          {/* <main className="flex-1 overflow-y-auto">{children}</main> */}
+          <main>{children}</main>
         </Providers>
       </body>
     </html>
