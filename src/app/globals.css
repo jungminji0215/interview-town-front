@@ -60,7 +60,7 @@
   }
 
   .card {
-    @apply dark:bg-dark-navy rounded-lg bg-white p-6 shadow-md;
+    @apply rounded-lg bg-white p-6 shadow-md;
   }
 
   .btn-primary {

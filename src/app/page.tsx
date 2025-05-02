@@ -12,7 +12,7 @@ export default async function HomePage() {
           height={500}
           className="rounded-lg shadow-md"
         />
-        <p className="text-h2 text-dark-navy dark:text-light-gray">
+        <p className="text-h2 text-dark-navy">
           여기저기 흩어져 있는 면접 질문 매번 찾기 번거롭다면
         </p>
       </section>
@@ -20,10 +20,10 @@ export default async function HomePage() {
       <section className="flex flex-col items-center justify-end gap-10 lg:flex-row">
         <div>
           <div className="flex flex-col gap-2">
-            <p className="text-h2 text-dark-navy dark:text-light-gray">
+            <p className="text-h2 text-dark-navy">
               <span className="text-primary">면접 타운</span> 에서 질문을 확인하고
             </p>
-            <p className="text-h2 text-dark-navy dark:text-light-gray">
+            <p className="text-h2 text-dark-navy">
               면접 준비하는 동료가 어떻게 답변하는지 확인해보세요!
             </p>
           </div>
