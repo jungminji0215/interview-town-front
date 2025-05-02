@@ -6,16 +6,16 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="bg-dark-navy border-b border-gray-600">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
+    <header className="dark:bg-dark-navy dark:border-light-gray border-b border-gray-400">
+      <nav className="wrapper flex items-center justify-between">
         <Link href={ROUTES.HOME}>
-          <p className="font-logo flex items-center text-3xl text-white">면접 타운</p>
+          <h1 className="font-title text-h1 text-dark-navy dark:text-light-gray">면접 타운</h1>
         </Link>
-        <div className="flex items-center gap-5">
-          <button aria-label="다크 모드 전환">
-            <Image src={'/dark-mode-moon.svg'} width={20} height={20} alt="다크모드" />
-          </button>
-        </div>
+        {/*<div className="flex items-center gap-5">*/}
+        {/*  <button aria-label="다크 모드 전환" className="cursor-pointer">*/}
+        {/*    <Image src={'/dark-mode-moon.svg'} width={30} height={30} alt="다크모드" />*/}
+        {/*  </button>*/}
+        {/*</div>*/}
       </nav>
     </header>
   );

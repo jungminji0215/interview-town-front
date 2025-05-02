@@ -1,6 +1,6 @@
 'use client';
 
-import { useInfiniteQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { getAnswers } from '@/api/answers';
 import AnswerItem from './AnswerItem';
 import React from 'react';
@@ -26,7 +26,7 @@ export default function AnswerList({ questionId }: Props) {
 
   return (
     <section aria-labelledby="answers-heading">
-      <h2 id="answers-heading" className="mb-4 text-xl font-semibold text-black">
+      <h2 id="answers-heading" className="text-h3 mb-4 font-semibold text-black">
         답변
       </h2>
 
@@ -41,7 +41,7 @@ export default function AnswerList({ questionId }: Props) {
           <button
             onClick={() => fetchNextPage()}
             disabled={isFetchingNextPage}
-            className="flex h-10 w-24 items-center justify-center rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 disabled:opacity-50"
+            className="btn-primary flex h-10 w-24 cursor-pointer items-center justify-center disabled:opacity-50"
           >
             {isFetchingNextPage ? <Spinner /> : '더보기'}
           </button>

@@ -1,6 +1,6 @@
 import Pagination from '@/components/Pagination';
 import { getQuestions } from '@/api/questions';
-import CategoryItems from '@/components/CategoryItems';
+import QuestionItems from '@/components/QuestionItems';
 
 type Props = {
   page: number;
@@ -12,7 +12,7 @@ export default async function QuestionList({ page, category }: Props) {
 
   return (
     <>
-      <CategoryItems questions={response.questions} />
+      <QuestionItems questions={response.questions} />
       <Pagination currentPage={response.currentPage} totalPages={response.totalPages} />
     </>
   );
