@@ -1,12 +1,9 @@
 import { Category } from '@/types/category';
 import { notFound } from 'next/navigation';
-import { delay } from '@/utils/delay';
 
 export const getCategories = async (): Promise<Category[]> => {
-  // await delay(2000);
-
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/categories`, {
-    next: { revalidate: 5 }, // TODO 하루로 변경
+    next: { revalidate: 30 },
   });
 
   if (!response.ok) {

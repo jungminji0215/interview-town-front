@@ -1,6 +1,6 @@
 'use client';
 
-import { useInfiniteQuery, useSuspenseInfiniteQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { getAnswers } from '@/api/answers';
 import AnswerItem from './AnswerItem';
 import React from 'react';
