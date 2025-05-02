@@ -7,9 +7,9 @@ type Props = {
 
 export default function QuestionItem({ question }: Props) {
   return (
-    <li className="rounded-md bg-white p-4 hover:bg-gray-100">
+    <li className="card transition hover:shadow-lg">
       <Link href={`/questions/${question.category.name}/${question.id}`}>
-        <h3 className="text-md text-black">{question.title}</h3>
+        <h3 className="text-h3 text-dark-navy mb-2 font-bold">{question.title}</h3>
         <p className="text-gray-500">{question.content}</p>
       </Link>
     </li>

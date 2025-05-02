@@ -34,11 +34,11 @@ export default function AnswerForm({ questionId }: Props) {
         className="w-full resize-none rounded-lg border border-gray-300 px-4 py-2 text-black"
         onChange={(e) => setContent(e.target.value)}
       />
-      {isError && <div className="text-sm text-red-500">{error.message}</div>}
+      {isError && <div className="text-error text-sm">{error.message}</div>}
       <div className="flex justify-end">
         <button
           type="submit"
-          className="font-content cursor-pointer rounded-lg bg-blue-500 px-5 py-2"
+          className="font-content bg-primary cursor-pointer rounded-lg px-5 py-2 text-white"
         >
           {isPending ? <Spinner /> : '등록'}
         </button>

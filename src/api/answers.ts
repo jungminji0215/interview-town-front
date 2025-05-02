@@ -1,5 +1,4 @@
 import { AnswerResponse } from '@/types/answer';
-import { delay } from '@/utils/delay';
 
 export const getAnswers = async ({
   pageParam = 1,
@@ -8,8 +7,6 @@ export const getAnswers = async ({
   pageParam?: number;
   questionId: number;
 }): Promise<AnswerResponse> => {
-  await delay(3000);
-
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/questions/${questionId}/answers?page=${pageParam}&pageSize=10`,
   );

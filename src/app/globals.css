@@ -1,63 +1,73 @@
 @import 'tailwindcss';
 
+/* 로고 */
 @font-face {
-  font-family: '1973MimiWorldR';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.1/1973MimiWorldR.woff')
+  font-family: 'JalnanGothic';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff')
     format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
+/* 본문 */
 @font-face {
-  font-family: 'SBAggroB';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+  font-family: 'NEXON Lv2 Gothic';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic.woff')
     format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'HakgyoansimGeurimilgiTTF-R';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimGeurimilgiTTF-R.woff2')
-    format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
-/* 버튼/태그	#E0E7FF 배경 + #4338CA 텍스트*/
 @theme {
-  --color-primary: #4338ca;
-  /*--color-secondary: var(--color-rose-quartz);*/
-  --color-secondary: #e0e7ff;
+  /* ● 색상(Color) */
+  --color-primary: #f88379; /* bg-primary, text-primary, border-primary */
+  --color-secondary: #ffd6d0; /* bg-secondary, text-secondary */
+  --color-light-gray: #f9fafb; /* bg-light-gray */
+  --color-dark-navy: #111827; /* bg-dark-navy, text-dark-navy */
+  --color-error: #e55b4e; /* text-error, bg-error */
+  --color-success: #34d399; /* text-success, bg-success */
 
-  /* 회백색*/
-  --color-light-gray: #f9fafb;
+  /* ● 폰트 패밀리(Font Family) */
+  --font-title: 'JalnanGothic'; /* font-title */
+  --font-body: 'NEXON Lv2 Gothic'; /* font-body */
 
-  /*짙은 남색 (다크 네이비)*/
-  --color-dark-navy: #111827;
-
-  --font-logo: 'SBAggroB';
-  --font-title: '1973MimiWorldR';
-  --font-content: 'HakgyoansimGeurimilgiTTF-R';
+  /* ● 타이포그래피(Text Sizes) */
+  --text-h1: 2.25rem; /* text-h1 */
+  --text-h2: 1.5rem; /* text-h2 */
+  --text-h3: 1.25rem;
+  --text-body: 1rem; /* text-body */
+  --text-caption: 0.875rem; /* text-caption */
 }
 
+/* 3) 글로벌 리셋・기본 스타일 */
 @layer base {
+  /* 폰트 패밀리 기본값 */
+  html {
+    font-family: var(--font-body), sans-serif;
+  }
+
+  /* border-color 기본값 통일 */
   *,
   ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
+  ::before {
+    /*border-color: var(--color-light-gray);*/
   }
 }
 
 @layer components {
   .wrapper {
-    @apply mx-auto max-w-5xl p-4;
+    @apply mx-auto max-w-6xl p-4;
   }
-}
 
-:root {
-  --color-rose-quartz: #f8cacc;
-  --color-serenity: #8da4d0;
+  .card {
+    @apply rounded-lg bg-white p-6 shadow-md;
+  }
+
+  .btn-primary {
+    @apply bg-primary hover:bg-secondary rounded-md px-4 py-2 text-white transition;
+  }
+
+  /*.btn-secondary {*/
+  /*  @apply bg-secondary text-primary hover:bg-primary rounded-md px-4 py-2 font-medium transition hover:text-white;*/
+  /*}*/
 }

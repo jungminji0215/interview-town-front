@@ -10,10 +10,10 @@ export default async function QuestionDetail({ questionId }: Props) {
 
   return (
     <article aria-labelledby="question-title">
-      <h2 id="question-title" className="mb-4 text-xl font-semibold text-black">
+      <h2 id="question-title" className="text-h2 mb-4 font-bold text-black">
         {question.title}
       </h2>
-      <p className="text-gray-500">{question.content}</p>
+      <p className="text-body text-gray-500">{question.content}</p>
     </article>
   );
 }

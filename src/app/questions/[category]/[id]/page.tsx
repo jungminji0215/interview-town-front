@@ -12,18 +12,18 @@ export default async function QuestionPage({ params }: Props) {
 
   return (
     <div className="wrapper flex flex-col gap-5">
-      <ContentCard>
+      <section className="card">
         <QuestionDetail questionId={Number(id)} />
-      </ContentCard>
+      </section>
 
-      <ContentCard>
+      <section className="card">
         <AnswerForm questionId={Number(id)} />
-      </ContentCard>
+      </section>
 
       <Suspense fallback={<AnswerListSkeleton count={10} />}>
-        <ContentCard>
+        <section className="card">
           <AnswerList questionId={Number(id)} />
-        </ContentCard>
+        </section>
       </Suspense>
     </div>
   );

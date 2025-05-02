@@ -11,7 +11,7 @@ export const getQuestions = async (page: number, category?: string) => {
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/questions?${params.toString()}`;
 
-  const response = await fetch(url, { cache: 'no-store' });
+  const response = await fetch(url, { next: { revalidate: 30 } });
 
   if (!response.ok) {
     throw new Error('질문 목록 불러오기 실패');
@@ -23,7 +23,7 @@ export const getQuestions = async (page: number, category?: string) => {
 
 export const getQuestion = async (id: number) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/questions/${id}`, {
-    cache: 'no-store', // TODO force-cache
+    next: { revalidate: 30 },
   });
 
   if (!response.ok) {
