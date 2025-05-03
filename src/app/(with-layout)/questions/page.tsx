@@ -1,7 +1,6 @@
 import { Suspense } from 'react';
 import QuestionSkeleton from '@/components/skeleton/QuestionListSkeleton';
 import QuestionList from '@/components/QuestionList';
-import type { Metadata } from 'next';
 
 type Props = {
   searchParams: Promise<{ page?: string }>;
