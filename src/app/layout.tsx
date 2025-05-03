@@ -19,7 +19,6 @@ export default function RootLayout({
       <body className="font-body bg-gray-50">
         <Header />
         <Providers>
-          {/* <main className="flex-1 overflow-y-auto">{children}</main> */}
           <main>{children}</main>
         </Providers>
       </body>
