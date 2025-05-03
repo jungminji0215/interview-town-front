@@ -7,6 +7,30 @@ type Props = {
   searchParams: Promise<{ page?: string }>;
 };
 
+export async function generateMetadata({ params }: Props) {
+  const { category } = await params;
+
+  return {
+    title: `면접 타운 | ${category}`,
+    description: `${category} 면접 질문`,
+    openGraph: {
+      type: 'article',
+      title: `면접 타운 | ${category} 면접 질문`,
+      description: `${category} 면접 질문`,
+      url: `https://www.interview-town.com/questions/${category}`,
+      siteName: '면접 타운',
+      images: [
+        {
+          url: '/thumbnail.png',
+          width: 1200,
+          height: 630,
+          alt: category,
+        },
+      ],
+    },
+  };
+}
+
 export default async function CategoryQuestionPage({ params, searchParams }: Props) {
   const { category } = await params;
   const { page } = await searchParams;
