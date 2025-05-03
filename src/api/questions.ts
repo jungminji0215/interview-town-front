@@ -1,15 +1,20 @@
 import { notFound } from 'next/navigation';
 
-export const getQuestions = async (page: number, category?: string) => {
+export const getQuestions = async (page?: number, category?: string) => {
   const params = new URLSearchParams();
 
-  params.set('page', String(page));
+  if (page) {
+    params.set('page', String(page));
+    params.set('pageSize', '10');
+  }
 
   if (category && category !== 'all') {
     params.set('category', category);
   }
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/questions?${params.toString()}`;
+  const query = params.toString();
+
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/questions${query ? `?${query}` : ''}`;
 
   const response = await fetch(url, { next: { revalidate: 30 } });
 
