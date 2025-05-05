@@ -11,6 +11,7 @@ export async function generateMetadata({ params }: Props) {
   const { category } = await params;
 
   return {
+    metadataBase: new URL('https://www.interview-town.com'),
     title: `면접 타운 | ${category}`,
     description: `${category} 면접 질문`,
     openGraph: {
@@ -21,10 +22,10 @@ export async function generateMetadata({ params }: Props) {
       siteName: '면접 타운',
       images: [
         {
-          url: '/thumbnail.png',
+          url: '/open-graph-image.png',
           width: 1200,
           height: 630,
-          alt: category,
+          alt: '면접 타운 썸네일 이미지',
         },
       ],
     },
