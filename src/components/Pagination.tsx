@@ -26,38 +26,37 @@ export default function Pagination({ currentPage, totalPages, visibleCount = 5 }
   const createLink = (page: number) => `/questions${category ? `/${category}` : ''}?page=${page}`;
 
   return (
-    <div className="flex items-center justify-center gap-2 py-4">
-      {currentPage > 1 && (
-        <Link
-          href={createLink(currentPage - 1)}
-          className="rounded-md bg-gray-300 px-3 py-2 text-sm text-black hover:bg-gray-400"
-        >
-          ◀
-        </Link>
-      )}
+    <nav aria-label="페이지 네비게이션">
+      <ul className="flex items-center justify-center gap-2 py-4">
+        {currentPage > 1 && (
+          <li className="rounded-md bg-gray-300 px-3 py-2 text-sm text-black hover:bg-gray-400">
+            <Link aria-label="이전 페이지" href={createLink(currentPage - 1)}>
+              ◀
+            </Link>
+          </li>
+        )}
 
-      {pages.map((page) => (
-        <Link
-          key={page}
-          href={createLink(page)}
-          className={`rounded-md px-4 py-2 text-sm font-medium ${
-            page === currentPage
-              ? 'bg-primary text-white'
-              : 'bg-gray-200 text-black hover:bg-gray-300'
-          }`}
-        >
-          {page}
-        </Link>
-      ))}
+        {pages.map((page) => (
+          <li
+            key={page}
+            className={`rounded-md px-4 py-2 text-sm font-medium ${
+              page === currentPage
+                ? 'bg-primary text-white'
+                : 'bg-gray-200 text-black hover:bg-gray-300'
+            }`}
+          >
+            <Link href={createLink(page)}>{page}</Link>
+          </li>
+        ))}
 
-      {currentPage < totalPages && (
-        <Link
-          href={createLink(currentPage + 1)}
-          className="rounded-md bg-gray-300 px-3 py-2 text-sm text-black hover:bg-gray-400"
-        >
-          ▶
-        </Link>
-      )}
-    </div>
+        {currentPage < totalPages && (
+          <li className="rounded-md bg-gray-300 px-3 py-2 text-sm text-black hover:bg-gray-400">
+            <Link aria-label="다음 페이지" href={createLink(currentPage + 1)}>
+              ▶
+            </Link>
+          </li>
+        )}
+      </ul>
+    </nav>
   );
 }

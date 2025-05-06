@@ -8,12 +8,11 @@ type Props = {
 };
 
 export default async function QuestionList({ page, category }: Props) {
-  const response = await getQuestions(page, category);
-
+  const { questions, currentPage, totalPages } = await getQuestions(page, category);
   return (
     <>
-      <QuestionItems questions={response.questions} />
-      <Pagination currentPage={response.currentPage} totalPages={response.totalPages} />
+      <QuestionItems questions={questions} />
+      <Pagination currentPage={currentPage} totalPages={totalPages} />
     </>
   );
 }

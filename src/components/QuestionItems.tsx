@@ -7,7 +7,7 @@ type Props = {
 
 export default function QuestionItems({ questions }: Props) {
   return (
-    <ul className="grid grid-cols-1 gap-8 py-4 md:grid-cols-2">
+    <ul aria-label="질문 리스트" className="grid grid-cols-1 gap-8 py-4 md:grid-cols-2">
       {questions.map((question) => (
         <QuestionItem key={question.id} question={question} />
       ))}
