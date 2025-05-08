@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getQuestions } from '@/api/questions';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://interview-town.com';
+  const baseUrl = 'https://www.interview-town.com';
 
   // 사이트맵에 추가할 ‘정적’ 페이지들
   const routes: MetadataRoute.Sitemap = [
