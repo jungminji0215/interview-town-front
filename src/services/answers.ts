@@ -1,8 +1,4 @@
-import { delay } from '@/utils/delay';
-
 export const addAnswer = async (questionId: number, content: string) => {
-  await delay(3000);
-
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/questions/${questionId}/answers`,
     {

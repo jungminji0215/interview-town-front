@@ -2,7 +2,9 @@ import React, { ReactNode } from 'react';
 
 import CategoryList from '@/components/CategoryList';
 
-export default function Layout({ children }: { children: ReactNode }) {
+type Props = { children: ReactNode };
+
+export default function Layout({ children }: Props) {
   return (
     <div className="wrapper">
       <CategoryList />

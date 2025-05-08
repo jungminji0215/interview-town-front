@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: '면접 타운',
   description:
     '개발자 면접 준비가 어려우신가요? 면접 타운에서 질문을 모아보고 동료 답변을 함께 확인해보세요.',
+  icons: {
+    icon: '/favicon.ico',
+  },
   openGraph: {
     type: 'website',
     title: '면접 타운 | 개발자 면접을 함께 연습하는 공간',

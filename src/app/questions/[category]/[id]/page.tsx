@@ -39,16 +39,22 @@ export default async function QuestionPage({ params }: Props) {
 
   return (
     <div className="wrapper flex flex-col gap-5">
-      <section className="card">
+      <section aria-labelledby="question-title" className="card">
         <QuestionDetail questionId={Number(id)} />
       </section>
 
-      <section className="card">
+      <section aria-labelledby="answer-form-heading" className="card">
+        <h2 id="answer-form-heading" className="sr-only">
+          답변 등록
+        </h2>
         <AnswerForm questionId={Number(id)} />
       </section>
 
       <Suspense fallback={<AnswerListSkeleton count={10} />}>
-        <section className="card">
+        <section aria-labelledby="answers-heading" className="card">
+          <h2 id="answers-heading" className="text-h3 mb-4 font-semibold text-black">
+            답변
+          </h2>
           <AnswerList questionId={Number(id)} />
         </section>
       </Suspense>
