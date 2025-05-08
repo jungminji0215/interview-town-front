@@ -1,9 +1,9 @@
 'use client';
 
-import { addAnswer } from '@/services/answers';
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Spinner from '@/components/ui/Spinner';
+import { addAnswer } from '@/api/answers';
 
 type Props = { questionId: number };
 
