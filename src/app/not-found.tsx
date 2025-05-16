@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className="wrapper mt-20 flex flex-col items-center gap-5">
       <Image
         src="/images/not-found.png"
-        alt="Not found"
+        alt="404 이미지"
         width={400}
         height={400}
         className="rounded-full"

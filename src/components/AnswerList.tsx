@@ -27,9 +27,14 @@ export default function AnswerList({ questionId }: Props) {
   return (
     <>
       <ul className="flex flex-col gap-5">
-        {answers.map((answer) => (
-          <AnswerItem key={answer.id} answer={answer} />
-        ))}
+        {answers.length > 0 ? (
+          answers.map((answer) => <AnswerItem key={answer.id} answer={answer} />)
+        ) : (
+          <div className="text-center text-gray-400">
+            앗! 아무 답변이 없네요. <br />
+            제일 먼저 답변해보세요. 😉
+          </div>
+        )}
       </ul>
 
       {hasNextPage && (
