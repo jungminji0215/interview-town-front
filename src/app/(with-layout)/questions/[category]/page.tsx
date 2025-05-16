@@ -12,11 +12,11 @@ export async function generateMetadata({ params }: Props) {
 
   return {
     metadataBase: new URL('https://www.interview-town.com'),
-    title: `면접 타운 | ${category}`,
+    title: `${category} 면접 질문 | 면접 타운`,
     description: `${category} 면접 질문`,
     openGraph: {
       type: 'article',
-      title: `면접 타운 | ${category} 면접 질문`,
+      title: `${category} 면접 질문 | 면접 타운`,
       description: `${category} 면접 질문`,
       url: `https://www.interview-town.com/questions/${category}`,
       siteName: '면접 타운',

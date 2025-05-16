@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    title: '면접 타운 | 개발자 면접을 함께 연습하는 공간',
+    title: '개발자 면접을 함께 연습하는 공간 | 면접 타운',
     description: '질문과 동료의 답변을 한 곳에서! 면접 타운에서 더 똑똑하게 준비하세요.',
     url: 'https://www.interview-town.com',
     siteName: '면접 타운',
