@@ -14,11 +14,11 @@ export async function generateMetadata({ params }: Props) {
 
   return {
     metadataBase: new URL('https://www.interview-town.com'),
-    title: `면접 타운 | ${question.title}`,
+    title: `${question.title} | 면접 타운`,
     description: `${question.content}`,
     openGraph: {
       type: 'article',
-      title: `면접 타운 | ${question.title}`,
+      title: `${question.title} | 면접 타운`,
       description: `${question.content}`,
       url: `https://www.interview-town.com/questions/${question.category.name}/${id}`,
       siteName: '면접 타운',

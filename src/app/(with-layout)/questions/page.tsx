@@ -1,9 +1,34 @@
 import { Suspense } from 'react';
 import QuestionSkeleton from '@/components/skeleton/QuestionListSkeleton';
 import QuestionList from '@/components/QuestionList';
+import type { Metadata } from 'next';
 
 type Props = {
   searchParams: Promise<{ page?: string }>;
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://www.interview-town.com'),
+  title: '개발자 면접 질문 | 면접 타운',
+  description: '개발자 면접 질문 모아보기',
+  icons: {
+    icon: '/favicon.ico',
+  },
+  openGraph: {
+    type: 'website',
+    title: '개발자 면접 질문 | 면접 타운',
+    description: '개발자 면접 질문 모아보기',
+    url: 'https://www.interview-town.com/questions',
+    siteName: '면접 타운',
+    images: [
+      {
+        url: '/open-graph-image.png',
+        width: 1200,
+        height: 630,
+        alt: '면접 타운 썸네일 이미지',
+      },
+    ],
+  },
 };
 
 export default async function QuestionPage({ searchParams }: Props) {
