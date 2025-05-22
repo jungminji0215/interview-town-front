@@ -34,7 +34,7 @@ export default function AnswerForm({ questionId }: Props) {
         required
         value={content}
         placeholder="여기에 답변을 입력하세요."
-        className="focus:ring-primary w-full resize-none rounded-lg border border-gray-300 px-4 py-2 text-black focus:ring focus:outline-none"
+        className="focus:ring-primary w-full resize-none rounded-lg border border-gray-300 px-4 py-2 focus:ring focus:outline-none"
         onChange={(e) => setContent(e.target.value)}
         rows={3}
       />

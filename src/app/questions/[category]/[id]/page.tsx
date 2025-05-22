@@ -52,7 +52,7 @@ export default async function QuestionPage({ params }: Props) {
 
       <Suspense fallback={<AnswerListSkeleton count={10} />}>
         <section aria-labelledby="answers-heading" className="card">
-          <h2 id="answers-heading" className="text-h3 mb-4 font-semibold text-black">
+          <h2 id="answers-heading" className="text-h3 mb-4 font-semibold">
             답변
           </h2>
           <AnswerList questionId={Number(id)} />

@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* 로고 */
 @font-face {
   font-family: 'JalnanGothic';
@@ -21,7 +23,9 @@
 @theme {
   /* ● 색상(Color) */
   --color-primary: #f88379; /* bg-primary, text-primary, border-primary */
-  --color-secondary: #ffd6d0; /* bg-secondary, text-secondary */
+  --color-primary-dark: #f45c4a;
+  --color-secondary: #fca39a; /* bg-secondary, text-secondary */
+
   --color-light-gray: #f9fafb; /* bg-light-gray */
   --color-dark-navy: #111827; /* bg-dark-navy, text-dark-navy */
   --color-error: #e55b4e; /* text-error, bg-error */
@@ -41,16 +45,20 @@
 
 /* 3) 글로벌 리셋・기본 스타일 */
 @layer base {
-  /* 폰트 패밀리 기본값 */
-  html {
-    font-family: var(--font-body), sans-serif;
+  :root {
+    /* 기본 다크 모드 색상 (기본값이 다크모드) */
+    --color-bg: #1b1b1f;
+    --color-text: #f9fafb;
+    --color-card: #282a36;
+    --color-primary: #f45c4a;
   }
 
-  /* border-color 기본값 통일 */
-  *,
-  ::after,
-  ::before {
-    /*border-color: var(--color-light-gray);*/
+  .light {
+    /* 라이트 모드 색상 오버라이드 */
+    --color-bg: #f9fafb;
+    --color-text: #111827;
+    --color-card: white;
+    --color-primary: #f88379;
   }
 }
 
@@ -60,14 +68,18 @@
   }
 
   .card {
-    @apply rounded-lg bg-white p-6 shadow-md;
+    background-color: var(--color-card);
+    @apply rounded-lg p-6 shadow-md;
   }
 
   .btn-primary {
-    @apply bg-primary hover:bg-secondary cursor-pointer rounded-md px-4 py-2 text-white transition;
+    background-color: var(--color-primary);
+    @apply hover:bg-secondary cursor-pointer rounded-md px-4 py-2 text-white transition;
   }
+}
 
-  /*.btn-secondary {*/
-  /*  @apply bg-secondary text-primary hover:bg-primary rounded-md px-4 py-2 font-medium transition hover:text-white;*/
-  /*}*/
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body), sans-serif;
 }

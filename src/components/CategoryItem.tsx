@@ -18,7 +18,7 @@ function CategoryItem({ category }: Props) {
   return (
     <li
       className={`flex transform cursor-pointer items-center rounded-md px-2 py-1 transition-transform ${
-        isActive ? 'bg-primary text-white' : 'bg-gray-200 hover:scale-110'
+        isActive ? 'bg-primary text-white' : 'text-dark-navy bg-gray-200 hover:scale-110'
       }`}
     >
       <Link href={`/questions/${category.name}`}>
