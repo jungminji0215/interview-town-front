@@ -10,10 +10,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/`,
       lastModified: new Date().toISOString(),
     },
-    {
-      url: `${baseUrl}/questions`,
-      lastModified: new Date().toISOString(),
-    },
   ];
 
   const { questions } = await getQuestions();
