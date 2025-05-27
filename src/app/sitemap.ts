@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const q of questions) {
     routes.push({
       url: `${baseUrl}/questions/${q.category.name}/${q.id}`,
-      lastModified: q.updatedAt,
+      // lastModified: q.updatedAt,
     });
   }
 

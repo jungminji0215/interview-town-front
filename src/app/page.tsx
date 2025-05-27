@@ -10,7 +10,7 @@ export default async function HomePage() {
       >
         <Image
           src="/images/main_image_A.png"
-          alt="책상 위에 면접 질문지를 보며 고민하는 사람"
+          alt=""
           width={500}
           height={500}
           priority={true}
@@ -27,7 +27,7 @@ export default async function HomePage() {
       >
         <Image
           src="/images/main_image_B.png"
-          alt="면접 타운 웹사이트를 보며 웃고 있는 사람"
+          alt=""
           width={500}
           height={500}
           priority={true}

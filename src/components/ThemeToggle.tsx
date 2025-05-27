@@ -11,7 +11,7 @@ export default function ThemeToggle() {
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       type="button"
       aria-label="다크 모드 전환"
-      className="cursor-pointer"
+      className="flex cursor-pointer"
     >
       <MoonIcon className="h-8 w-8" />
     </button>

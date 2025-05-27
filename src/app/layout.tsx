@@ -7,7 +7,7 @@ import ThemeProvider from '@/theme/ThemeProvider';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.interview-town.com'),
-  title: '면접 타운',
+  title: '면접 타운', // 구글과 브라우저 탭에 표시
   description:
     '개발자 면접 준비가 어려우신가요? 면접 타운에서 질문을 모아보고 동료 답변을 함께 확인해보세요.',
   icons: {
@@ -46,7 +46,7 @@ export default function RootLayout({
         >
           <Header />
           <Providers>
-            <main>{children}</main>
+            <main className="h-screen">{children}</main>
           </Providers>
         </ThemeProvider>
       </body>
