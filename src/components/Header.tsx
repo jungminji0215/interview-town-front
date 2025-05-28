@@ -15,7 +15,7 @@ export default function Header() {
         </Link>
         <ul className="flex items-center gap-4">
           <li>
-            <Link href={ROUTES.SIGN_UP}>
+            <Link href={ROUTES.SIGN_IN}>
               <UserCircleIcon className="h-8 w-8" />
             </Link>
           </li>
