@@ -17,9 +17,8 @@ export const signUp = async ({ email, password }: { email: string; password: str
   return data;
 };
 
-export const login = async ({ email, password }: { email: string; password: string }) => {
-  // 로그인 요청
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
+export const signin = async ({ email, password }: { email: string; password: string }) => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -29,6 +28,10 @@ export const login = async ({ email, password }: { email: string; password: stri
   });
 
   const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
 
   return data;
 };

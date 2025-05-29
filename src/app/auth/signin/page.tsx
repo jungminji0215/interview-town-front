@@ -1,46 +1,47 @@
-import LoginForm from '@/components/LoginForm';
 import { ROUTES } from '@/constants/routes';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import type { Metadata } from 'next';
+import SignInForm from '@/app/auth/signin/_components/SignInForm';
+
+export const metadata: Metadata = {
+  title: '로그인 | 면접 타운',
+  description: '면접 타운에 로그인해보세요.',
+  openGraph: {
+    title: '로그인 | 면접 타운',
+    description: '면접 타운에 로그인해보세요.',
+    url: 'https://www.interview-town.com/auth/signin',
+    siteName: '면접 타운',
+    images: [
+      {
+        url: '/open-graph-image.png',
+        width: 1200,
+        height: 630,
+        alt: '면접 타운 썸네일 이미지',
+      },
+    ],
+  },
+};
 
 export default function LoginPage() {
   return (
-    <section className="mx-auto flex h-full max-w-5xl items-center justify-center p-5">
-      <div className="w-full max-w-[23rem] bg-white p-5">
-        <div className="font-title pt-3 pb-5 text-center text-2xl">로그인</div>
+    <section className="mx-auto mt-40 flex max-w-5xl items-center justify-center">
+      <div className="w-full max-w-[23rem] p-5">
+        <div className="pb-10 text-center text-2xl">로그인</div>
 
         {/* 로그인 Form */}
-        <LoginForm />
+        <SignInForm />
 
-        <div className="my-4 flex items-center gap-2">
-          <div className="flex-1 border-t border-gray-300"></div>
-          <p className="font-content text-xs text-gray-300">OR</p>
-          <div className="flex-1 border-t border-gray-300"></div>
-        </div>
-
-        {/* 소셜 로그인 */}
-        <div className="flex justify-center gap-3">
-          <Image
-            src={'/signin-google.svg'}
-            alt="구글 로그인"
-            width={40}
-            height={40}
-            className="cursor-pointer"
-          />
-          <Image
-            src={'/signin-github.svg'}
-            alt="깃허브 로그인"
-            width={40}
-            height={40}
-            className="cursor-pointer"
-          />
+        <div className="mt-4 flex items-center gap-2">
+          <div className="flex-1 border-t"></div>
+          <p className="text-xs">OR</p>
+          <div className="flex-1 border-t"></div>
         </div>
 
         {/* 회원가입 페이지 이동 버튼 */}
-        <div className="py-1 pt-3 text-center">
+        <div className="pt-5 text-center">
           <Link href={ROUTES.SIGN_UP}>
-            <span className="font-content text-sm text-gray-600 hover:text-gray-500">회원가입</span>
+            <span className="hover:text-primary">회원 가입</span>
           </Link>
         </div>
       </div>
