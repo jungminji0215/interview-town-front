@@ -1,4 +1,4 @@
-export const signUp = async ({ email, password }: { email: string; password: string }) => {
+export const signup = async ({ email, password }: { email: string; password: string }) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/signup`, {
     method: 'POST',
     headers: {
@@ -36,27 +36,52 @@ export const signin = async ({ email, password }: { email: string; password: str
   return data;
 };
 
-export const getSession = async (token: string) => {
-  // TODO 임시 -> 쿠키에서 조회하는 것으로 변경
-  if (!token) {
-    return null;
+export const getSession = async () => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/session`, {
+    // headers: {
+    //   'Content-Type': 'application/json',
+    // },
+    credentials: 'include',
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
   }
 
-  /** 토큰 검증 하고 새 토큰 발습 */
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/session`, {
-    method: 'GET',
+  return data;
+};
+
+export const refreshAccessToken = async () => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/refreshToken`, {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
     },
     credentials: 'include',
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error('Failed to fetch session');
+    throw new Error(data.message);
   }
 
+  return data;
+};
+
+export const getMe = async () => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/me`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  });
+
   const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
 
   return data;
 };

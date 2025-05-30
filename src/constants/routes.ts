@@ -3,4 +3,5 @@ export const ROUTES = {
   QUESTIONS: '/questions',
   SIGN_IN: '/auth/signin',
   SIGN_UP: '/auth/signup',
+  MY_PAGE: '/mypage',
 };

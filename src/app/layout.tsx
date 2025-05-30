@@ -4,6 +4,7 @@ import React, { ReactNode } from 'react';
 import Header from '@/components/Header';
 import Providers from '@/providers/QueryProvider';
 import ThemeProvider from '@/theme/ThemeProvider';
+import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.interview-town.com'),
@@ -44,10 +45,12 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <Header />
-          <Providers>
-            <main className="h-screen">{children}</main>
-          </Providers>
+          <AuthProvider>
+            <Providers>
+              <Header />
+              <main className="h-screen">{children}</main>
+            </Providers>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

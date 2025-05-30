@@ -8,10 +8,12 @@ import { ROUTES } from '@/constants/routes';
 import { z } from 'zod';
 import { authSchema } from '@/schemas/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuth } from '@/context/AuthContext';
 
 type FormFields = z.infer<typeof authSchema>;
 
 export default function SignInForm() {
+  const { setToken, setUser } = useAuth();
   const router = useRouter();
 
   const {
@@ -25,7 +27,11 @@ export default function SignInForm() {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await signin(data);
+      const response = await signin(data);
+
+      setToken(response.accessToken);
+      setUser(response.email); // TODO 닉네임으로 변경
+
       router.push(ROUTES.QUESTIONS);
     } catch (error) {
       if (error instanceof Error) {

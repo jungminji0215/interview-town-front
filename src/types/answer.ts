@@ -5,9 +5,14 @@ export type Answer = {
   content: string;
 };
 
+// TODO 이름 별론데..
+export type AnswerItem = Answer & {
+  isMine: boolean;
+};
+
 export type AnswerResponse = {
   data: {
-    answers: Answer[];
+    answers: AnswerItem[];
     pagination: {
       currentPage: number;
       totalPages: number;

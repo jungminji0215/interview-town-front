@@ -2,7 +2,7 @@ import { ROUTES } from '@/constants/routes';
 import Link from 'next/link';
 import React from 'react';
 import type { Metadata } from 'next';
-import SignInForm from '@/app/auth/signin/_components/SignInForm';
+import SignInForm from '@/app/auth/_components/SignInForm';
 
 export const metadata: Metadata = {
   title: '로그인 | 면접 타운',

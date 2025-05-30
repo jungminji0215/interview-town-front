@@ -1,6 +1,6 @@
 'use client';
 
-import { signUp } from '@/api/auth';
+import { signup } from '@/api/auth';
 import Spinner from '@/components/ui/Spinner';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
@@ -25,7 +25,7 @@ export default function SignUpForm() {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await signUp(data);
+      await signup(data);
       // TODO 성공 시 alert
       router.push(ROUTES.SIGN_IN);
     } catch (error) {

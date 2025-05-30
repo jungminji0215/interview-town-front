@@ -1,7 +1,7 @@
 import { ROUTES } from '@/constants/routes';
 import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
-import { UserCircleIcon } from '@heroicons/react/24/outline';
+import AuthMenu from '@/components/AuthMenu';
 
 export default function Header() {
   return (
@@ -15,9 +15,7 @@ export default function Header() {
         </Link>
         <ul className="flex items-center gap-4">
           <li>
-            <Link href={ROUTES.SIGN_IN}>
-              <UserCircleIcon className="h-8 w-8" />
-            </Link>
+            <AuthMenu />
           </li>
           <li>
             <ThemeToggle />
