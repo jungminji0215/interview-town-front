@@ -5,7 +5,7 @@ import AuthMenu from '@/components/AuthMenu';
 
 export default function Header() {
   return (
-    <header className="border-b border-gray-500">
+    <header className="shadow-md">
       <nav
         aria-label="사이트 전체 네비게이션"
         className="wrapper flex items-center justify-between"

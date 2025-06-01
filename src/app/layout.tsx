@@ -48,7 +48,7 @@ export default function RootLayout({
           <AuthProvider>
             <Providers>
               <Header />
-              <main className="h-screen">{children}</main>
+              <main>{children}</main>
             </Providers>
           </AuthProvider>
         </ThemeProvider>
