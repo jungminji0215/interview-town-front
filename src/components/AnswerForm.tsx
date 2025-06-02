@@ -31,7 +31,11 @@ export default function AnswerForm({ questionId }: Props) {
     },
     onSuccess: () => {
       setContent('');
-      queryClient.invalidateQueries({ queryKey: ['answers', questionId] });
+
+      queryClient.invalidateQueries({ queryKey: ['answers', questionId, user?.id] });
+
+      // 마이페이지(내가 답변한 질문 목록)도 다시 불러오도록 무효화
+      queryClient.invalidateQueries({ queryKey: ['answers', 'user', user?.id] });
     },
   });
 

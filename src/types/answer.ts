@@ -19,3 +19,13 @@ export type AnswerResponse = {
     };
   };
 };
+
+export type MyAnswer = {
+  questionId: number;
+  questionTitle: string;
+  categoryId: number;
+  categoryName: string;
+  answerId: number;
+  content: string;
+  answeredAt: string;
+};

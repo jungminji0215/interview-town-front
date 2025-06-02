@@ -13,7 +13,7 @@ const features = [
   {
     title: '답변 작성',
     description: '답변을 작성하고, 동료의 답변과 비교해보세요.',
-    href: ROUTES.MY_PAGE,
+    href: ROUTES.QUESTIONS,
     icon: ChatBubbleOvalLeftEllipsisIcon,
     gradient: 'from-green-500 to-teal-400',
   },
@@ -45,7 +45,7 @@ export default function HomePage() {
             <h3 className="mb-2 text-2xl font-semibold">{title}</h3>
             <p className="text-gray-500">{description}</p>
 
-            <div className="mt-6 inline-flex items-center text-indigo-300 transition">
+            <div className="text-secondary mt-6 inline-flex items-center transition">
               <span>알아보기</span>
               <ChevronRightIcon className="ml-1 h-5 w-5" />
             </div>
