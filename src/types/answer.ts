@@ -1,18 +1,15 @@
 export type Answer = {
   id: number;
-  questionId: number;
-  userId: number;
   content: string;
-};
-
-// TODO 이름 별론데..
-export type AnswerItem = Answer & {
-  isMine: boolean;
+  createdAt: string;
+  updatedAt?: string;
+  questionId: number;
+  userId?: number;
 };
 
 export type AnswerResponse = {
   data: {
-    answers: AnswerItem[];
+    answers: Answer[];
     pagination: {
       currentPage: number;
       totalPages: number;
@@ -28,4 +25,14 @@ export type MyAnswer = {
   answerId: number;
   content: string;
   answeredAt: string;
+};
+
+export type AnswerWithUser = {
+  id: number;
+  content: string;
+  createdAt: string;
+  questionId: number;
+  user: {
+    nickname: string;
+  };
 };

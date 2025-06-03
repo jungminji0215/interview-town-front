@@ -1,9 +1,10 @@
 import React, { Suspense } from 'react';
 import QuestionDetail from '@/components/QuestionDetail';
-import AnswerList from '@/components/AnswerList';
-import AnswerForm from '@/components/AnswerForm';
+import AnswerList from '@/components/answer/AnswerList';
+import AnswerForm from '@/components/answer/AnswerForm';
 import AnswerListSkeleton from '@/components/skeleton/AnswerListSkeleton';
 import { getQuestion } from '@/api/questions';
+import MyAnswerList from '@/components/answer/MyAnswerList';
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -50,11 +51,17 @@ export default async function QuestionPage({ params }: Props) {
         <AnswerForm questionId={Number(id)} />
       </section>
 
-      <Suspense fallback={<AnswerListSkeleton count={10} />}>
+      {/* 내가 쓴 답변 */}
+      <Suspense fallback={<AnswerListSkeleton count={2} />}>
+        <MyAnswerList questionId={Number(id)} />
+      </Suspense>
+
+      {/* 타인이 쓴 답변 */}
+      <Suspense fallback={<AnswerListSkeleton count={5} />}>
         <section aria-labelledby="answers-heading" className="card">
-          <h2 id="answers-heading" className="text-h3 mb-4 font-semibold">
+          <h3 id="answers-heading" className="text-h3 mb-4 font-semibold">
             답변
-          </h2>
+          </h3>
           <AnswerList questionId={Number(id)} />
         </section>
       </Suspense>

@@ -41,8 +41,7 @@ export default function AnswerList({ questionId }: Props) {
         </ul>
       ) : (
         <div className="text-center text-gray-400">
-          앗! 아무 답변이 없네요. <br />
-          제일 먼저 답변해보세요. 😉
+          <p>아직 다른 사람의 답변이 없습니다.</p>
         </div>
       )}
 
