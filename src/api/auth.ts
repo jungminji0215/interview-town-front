@@ -23,7 +23,7 @@ export const signin = async ({ email, password }: { email: string; password: str
     headers: {
       'Content-Type': 'application/json',
     },
-    credentials: 'include', // TODO 나중에 refresh token 테스트
+    credentials: 'include',
     body: JSON.stringify({ email, password }),
   });
 
@@ -41,7 +41,7 @@ export const getSession = async () => {
     // headers: {
     //   'Content-Type': 'application/json',
     // },
-    credentials: 'include',
+    credentials: 'include', // 참고로 이 옵션은 서버 사이드에서는 작동하지 않는다.
   });
   const data = await response.json();
 
