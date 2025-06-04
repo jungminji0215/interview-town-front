@@ -1,54 +1,56 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { ROUTES } from '@/constants/routes';
+import { ChatBubbleOvalLeftEllipsisIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
-export default async function HomePage() {
+const features = [
+  {
+    title: '질문 찾기',
+    description: '카테고리 별로 면접 질문을 한 번에 모아보세요.',
+    href: ROUTES.QUESTIONS,
+    icon: ChevronRightIcon,
+    gradient: 'from-indigo-500 to-purple-500',
+  },
+  {
+    title: '답변 작성',
+    description: '답변을 작성하고, 동료의 답변과 비교해보세요.',
+    href: ROUTES.QUESTIONS,
+    icon: ChatBubbleOvalLeftEllipsisIcon,
+    gradient: 'from-green-500 to-teal-400',
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="wrapper flex flex-col gap-10 p-4">
-      <section
-        aria-labelledby="intro-heading"
-        className="flex flex-col items-center gap-3 lg:flex-row lg:gap-10"
-      >
-        <Image
-          src="/images/main_image_A.png"
-          alt="책상 위에 면접 질문지를 보며 고민하는 사람"
-          width={500}
-          height={500}
-          priority={true}
-          className="rounded-lg"
-        />
-        <h2 id="intro-heading" className="text-h2">
-          면접 질문 매번 찾기 번거롭다면?
-        </h2>
+    <div className="wrapper space-y-16 pt-12">
+      <section className="space-y-4 text-center">
+        <p>면접 질문을 모아보고, 동료의 실제 답변으로 배우세요.</p>
+        <Link href={ROUTES.QUESTIONS} className="btn-primary inline-block px-6 py-3">
+          지금 시작하기
+        </Link>
       </section>
 
-      <section
-        aria-labelledby="feature-heading"
-        className="flex flex-col items-center gap-3 lg:flex-row lg:gap-10"
-      >
-        <Image
-          src="/images/main_image_B.png"
-          alt="면접 타운 웹사이트를 보며 웃고 있는 사람"
-          width={500}
-          height={500}
-          priority={true}
-          className="rounded-lg"
-        />
-        <div>
-          <h2 id="feature-heading" className="text-h2 mb-1">
-            <span className="text-primary dark:text-primary-dark">면접 타운</span>에서 질문을
-            모아보고
-            <br />
-            동료의 답변을 확인해보세요!
-          </h2>
-
+      <section className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
+        {features.map(({ title, description, href, icon: Icon, gradient }) => (
           <Link
-            aria-label="면접 질문 목록으로 이동"
-            href="/questions"
-            className="btn-primary text-h3 mt-4 inline-block"
+            key={title}
+            href={href}
+            className="card rounded-2xl shadow-lg transition hover:-translate-y-1 hover:shadow-2xl"
           >
-            면접 타운 시작하기
+            <div
+              className={`mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-tr ${gradient} text-white transition group-hover:scale-110`}
+            >
+              <Icon className="h-6 w-6" />
+            </div>
+
+            <h3 className="mb-2 text-2xl font-semibold">{title}</h3>
+            <p className="text-gray-500">{description}</p>
+
+            <div className="text-secondary mt-6 inline-flex items-center transition">
+              <span>알아보기</span>
+              <ChevronRightIcon className="ml-1 h-5 w-5" />
+            </div>
           </Link>
-        </div>
+        ))}
       </section>
     </div>
   );

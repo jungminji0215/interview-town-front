@@ -14,6 +14,7 @@ function CategoryItem({ category }: Props) {
 
   const currentCategory = param.category ?? 'all';
   const isActive = currentCategory === category.name;
+  const href = category.name === 'all' ? '/questions' : `/questions/${category.name}`;
 
   return (
     <li
@@ -21,7 +22,7 @@ function CategoryItem({ category }: Props) {
         isActive ? 'bg-primary text-white' : 'text-dark-navy bg-gray-200 hover:scale-110'
       }`}
     >
-      <Link href={`/questions/${category.name}`}>
+      <Link href={href}>
         <h3 className="text-h3">{category.name}</h3>
       </Link>
     </li>

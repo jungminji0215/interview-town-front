@@ -1,19 +1,8 @@
-import React from "react";
-import { useFormStatus } from "react-dom";
+import React from 'react';
 
-export default function SubmitButton({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { pending } = useFormStatus();
-
+export default function SubmitButton({ children }: { children: React.ReactNode }) {
   return (
-    <button
-      disabled={pending}
-      type="submit"
-      className="rounded-md p-2 bg-secondary font-content cursor-pointer"
-    >
+    <button type="submit" className="btn-primary font-content cursor-pointer rounded-md p-4">
       {children}
     </button>
   );

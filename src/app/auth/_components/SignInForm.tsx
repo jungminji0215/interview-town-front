@@ -1,17 +1,19 @@
 'use client';
 
-import { signup } from '@/api/auth';
+import { signin } from '@/api/auth';
 import Spinner from '@/components/ui/Spinner';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { ROUTES } from '@/constants/routes';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { authSchema } from '@/schemas/auth';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuth } from '@/context/AuthContext';
 
 type FormFields = z.infer<typeof authSchema>;
 
-export default function SignUpForm() {
+export default function SignInForm() {
+  const { setToken, setUser } = useAuth();
   const router = useRouter();
 
   const {
@@ -25,23 +27,19 @@ export default function SignUpForm() {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      await signup(data);
-      // TODO 성공 시 alert
-      router.push(ROUTES.SIGN_IN);
+      const response = await signin(data);
+
+      setToken(response.accessToken);
+      setUser(response.email); // TODO 닉네임으로 변경
+
+      router.push(ROUTES.QUESTIONS);
     } catch (error) {
       if (error instanceof Error) {
-        // TODO 분리
         switch (error.message) {
-          case 'user_exist':
-            setError('email', { type: 'server', message: '이미 사용 중인 이메일입니다.' });
-            break;
-          case 'invalid_email':
-            setError('email', { type: 'server', message: '올바른 이메일을 입력해주세요.' });
-            break;
-          case 'password_too_short':
-            setError('password', {
+          case 'invalid_credentials':
+            setError('root', {
               type: 'server',
-              message: '비밀번호는 6글자 이상 입력해주세요.',
+              message: '이메일 또는 비밀번호를 확인해주세요.',
             });
             break;
           default:
@@ -49,7 +47,6 @@ export default function SignUpForm() {
             console.error(error);
         }
       } else {
-        // throw "문자열"이나 throw { code: 123 }처럼 Error 가 아닌 값을 던졌을 때 대비한 안전장치
         alert('알 수 없는 오류가 발생했습니다.');
         console.error(error);
       }
@@ -73,14 +70,16 @@ export default function SignUpForm() {
       />
       {errors?.password && <p className="px-2 text-sm text-red-500">{errors.password.message}</p>}
 
-      {/* TODO 버튼 분리 */}
       <button
         disabled={isSubmitting}
         type="submit"
         className="btn-primary cursor-pointer rounded-md p-4 text-center"
       >
-        <p className="flex justify-center">{isSubmitting ? <Spinner /> : '회원 가입'}</p>
+        <p className="flex justify-center">{isSubmitting ? <Spinner /> : '로그인'}</p>
       </button>
+      {errors?.root && (
+        <p className="px-2 text-center text-sm text-red-500">{errors.root.message}</p>
+      )}
     </form>
   );
 }
