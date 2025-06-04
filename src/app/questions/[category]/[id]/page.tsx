@@ -19,21 +19,21 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${question.title} | 면접 타운`,
     description: question.content,
-    openGraph: {
-      type: 'article',
-      title: `${question.title} | 면접 타운`,
-      description: question.content,
-      url: `https://www.interview-town.com/questions/${category}/${id}`,
-      siteName: '면접 타운',
-      images: [
-        {
-          url: '/open-graph-image.png',
-          width: 1200,
-          height: 630,
-          alt: '면접 타운 썸네일',
-        },
-      ],
-    },
+    // openGraph: {
+    //   type: 'article',
+    //   title: `${question.title} | 면접 타운`,
+    //   description: question.content,
+    //   url: `https://www.interview-town.com/questions/${category}/${id}`,
+    //   siteName: '면접 타운',
+    //   images: [
+    //     {
+    //       url: '/open-graph-image.png',
+    //       width: 1200,
+    //       height: 630,
+    //       alt: '면접 타운 썸네일',
+    //     },
+    //   ],
+    // },
   };
 }
 
