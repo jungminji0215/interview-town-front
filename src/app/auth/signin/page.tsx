@@ -5,22 +5,22 @@ import type { Metadata } from 'next';
 import SignInForm from '@/app/auth/_components/SignInForm';
 
 export const metadata: Metadata = {
-  title: '로그인 | 면접 타운',
+  title: '로그인',
   description: '면접 타운에 로그인해보세요.',
-  openGraph: {
-    title: '로그인 | 면접 타운',
-    description: '면접 타운에 로그인해보세요.',
-    url: 'https://www.interview-town.com/auth/signin',
-    siteName: '면접 타운',
-    images: [
-      {
-        url: '/open-graph-image.png',
-        width: 1200,
-        height: 630,
-        alt: '면접 타운 썸네일 이미지',
-      },
-    ],
-  },
+  // openGraph: {
+  //   title: '로그인 | 면접 타운',
+  //   description: '면접 타운에 로그인해보세요.',
+  //   url: 'https://www.interview-town.com/auth/signin',
+  //   siteName: '면접 타운',
+  //   images: [
+  //     {
+  //       url: '/open-graph-image.png',
+  //       width: 1200,
+  //       height: 630,
+  //       alt: '면접 타운 썸네일 이미지',
+  //     },
+  //   ],
+  // },
 };
 
 export default function LoginPage() {

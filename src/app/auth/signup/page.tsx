@@ -5,22 +5,22 @@ import React from 'react';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '회원 가입 | 면접 타운',
+  title: '회원 가입',
   description: '면접 타운에 회원 가입해보세요.',
-  openGraph: {
-    title: '회원 가입 | 면접 타운',
-    description: '면접 타운에 회원 가입해보세요.',
-    url: 'https://www.interview-town.com/auth/signin',
-    siteName: '면접 타운',
-    images: [
-      {
-        url: '/open-graph-image.png',
-        width: 1200,
-        height: 630,
-        alt: '면접 타운 썸네일 이미지',
-      },
-    ],
-  },
+  // openGraph: {
+  //   title: '회원 가입',
+  //   description: '면접 타운에 회원 가입해보세요.',
+  //   url: 'https://www.interview-town.com/auth/signin',
+  //   siteName: '면접 타운',
+  //   images: [
+  //     {
+  //       url: '/open-graph-image.png',
+  //       width: 1200,
+  //       height: 630,
+  //       alt: '면접 타운 썸네일 이미지',
+  //     },
+  //   ],
+  // },
 };
 
 export default function SignUpPage() {
