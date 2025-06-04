@@ -31,19 +31,21 @@ export default function AnswerList({ questionId }: Props) {
 
   const answers = data.pages.flatMap((p) => p.data.answers);
 
+  if (answers.length === 0) {
+    return (
+      <div className="text-center text-gray-400">
+        <p>아무도 답변을 등록하지 않았습니다. 🥲</p>
+      </div>
+    );
+  }
+
   return (
     <>
-      {answers.length > 0 ? (
-        <ul className="flex flex-col gap-5">
-          {answers.map((answer) => (
-            <AnswerItem key={answer.id} answer={answer} />
-          ))}
-        </ul>
-      ) : (
-        <div className="text-center text-gray-400">
-          <p>아직 다른 사람의 답변이 없습니다.</p>
-        </div>
-      )}
+      <ul className="flex flex-col gap-5">
+        {answers.map((answer) => (
+          <AnswerItem key={answer.id} answer={answer} />
+        ))}
+      </ul>
 
       {hasNextPage && (
         <div className="mt-4 flex justify-center">

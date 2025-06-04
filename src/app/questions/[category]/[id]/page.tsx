@@ -6,36 +6,38 @@ import AnswerListSkeleton from '@/components/skeleton/AnswerListSkeleton';
 import { getQuestion } from '@/api/questions';
 import MyAnswerList from '@/components/answer/MyAnswerList';
 
-type Props = { params: Promise<{ id: string }> };
+type PageProps = { params: Promise<{ category: string; id: string }> };
 
-export async function generateMetadata({ params }: Props) {
-  const { id } = await params;
+/**
+ * generateMetadata: 서버 사이드에서 해당 질문을 가져와 OG 메타 및 SEO 설정
+ */
+export async function generateMetadata({ params }: PageProps) {
+  const { id, category } = await params;
 
   const question = await getQuestion(Number(id));
 
   return {
-    metadataBase: new URL('https://www.interview-town.com'),
     title: `${question.title} | 면접 타운`,
-    description: `${question.content}`,
+    description: question.content,
     openGraph: {
       type: 'article',
       title: `${question.title} | 면접 타운`,
-      description: `${question.content}`,
-      url: `https://www.interview-town.com/questions/${question.category.name}/${id}`,
+      description: question.content,
+      url: `https://www.interview-town.com/questions/${category}/${id}`,
       siteName: '면접 타운',
       images: [
         {
           url: '/open-graph-image.png',
           width: 1200,
           height: 630,
-          alt: '면접 타운 썸네일 이미지',
+          alt: '면접 타운 썸네일',
         },
       ],
     },
   };
 }
 
-export default async function QuestionPage({ params }: Props) {
+export default async function QuestionPage({ params }: PageProps) {
   const { id } = await params;
 
   return (
@@ -45,14 +47,14 @@ export default async function QuestionPage({ params }: Props) {
       </section>
 
       <section aria-labelledby="answer-form-heading" className="card">
-        <h2 id="answer-form-heading" className="sr-only">
-          답변 등록
-        </h2>
+        {/*<h2 id="answer-form-heading" className="sr-only">*/}
+        {/*  답변 등록*/}
+        {/*</h2>*/}
         <AnswerForm questionId={Number(id)} />
       </section>
 
       {/* 내가 쓴 답변 */}
-      <Suspense fallback={<AnswerListSkeleton count={2} />}>
+      <Suspense fallback={<AnswerListSkeleton count={1} />}>
         <MyAnswerList questionId={Number(id)} />
       </Suspense>
 

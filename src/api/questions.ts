@@ -1,9 +1,6 @@
 import { notFound } from 'next/navigation';
-import { delay } from '@/utils/delay';
 
 export const getQuestions = async (page?: number, category?: string) => {
-  // await delay(3000);
-
   const params = new URLSearchParams();
 
   if (page) {

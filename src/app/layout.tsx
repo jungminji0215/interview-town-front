@@ -44,6 +44,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
+  // TODO 깔끔하게 파일 분리
+
   // 1) 브라우저(클라이언트)가 보낸 쿠키( HttpOnly refreshToken )를 읽어옴
   //  cookies() 자체가 Promise<ReadonlyRequestCookies>를 반환하므로 반드시 await 해 주어야 함
   const cookieStore = await cookies();

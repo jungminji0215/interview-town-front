@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { ChatBubbleLeftRightIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '@/context/AuthContext';
-import { useQuery } from '@tanstack/react-query';
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { useFetch } from '@/hooks/useFetch';
 import { MyAnswer } from '@/types/answer';
 
@@ -11,20 +11,16 @@ export default function MyAnswerQuestions() {
   const { user } = useAuth();
   const fetchWrapper = useFetch();
 
-  const { data: answers, isLoading } = useQuery({
+  const { data: answers } = useSuspenseQuery({
     queryKey: ['answers', 'user', user?.id],
     queryFn: async () => {
       const res = await fetchWrapper('/api/me/answers');
       return res.data.answers as MyAnswer[];
     },
-    enabled: !!user?.id, //  user가 없으면 쿼리 실행 스킵 (이거 없으면 유저 정보 없이 요청이 한 번 이루어지므로 401 오류 한 번 발생함)
+    // enabled: !!user?.id, //  user가 없으면 쿼리 실행 스킵 (이거 없으면 유저 정보 없이 요청이 한 번 이루어지므로 401 오류 한 번 발생함)
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
   });
-
-  if (isLoading) return '로딩중';
-
-  console.log('내가 답변한 질문들 : ', answers);
 
   return (
     <section className="space-y-6">
@@ -32,7 +28,6 @@ export default function MyAnswerQuestions() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {answers?.map((answer) => (
-          // 카드색 bg-gray-800 도 괜찮
           <div key={answer.questionId} className="card">
             {/* 질문 제목 */}
             <Link href={`/questions/${answer.questionId}`} className="line-clamp-1 text-lg">
