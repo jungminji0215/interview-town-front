@@ -19,21 +19,6 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-  openGraph: {
-    type: 'website',
-    title: '개발자 면접을 함께 연습하는 공간 | 면접 타운',
-    description: '질문과 동료의 답변을 한 곳에서! 면접 타운에서 더 똑똑하게 준비하세요.',
-    url: 'https://www.interview-town.com',
-    siteName: '면접 타운',
-    images: [
-      {
-        url: '/open-graph-image.png',
-        width: 1200,
-        height: 630,
-        alt: '면접 타운 썸네일 이미지',
-      },
-    ],
-  },
 };
 
 type SessionResponse = {
