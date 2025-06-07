@@ -7,6 +7,7 @@ import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
 import { useFetch } from '@/hooks/useFetch';
+import { QUERY_KEYS } from '@/constants/queryKeys';
 
 type Props = { questionId: number };
 
@@ -32,10 +33,11 @@ export default function AnswerForm({ questionId }: Props) {
     onSuccess: () => {
       setContent('');
 
-      queryClient.invalidateQueries({ queryKey: ['answers', 'user', questionId, user?.id] });
+      // queryClient.invalidateQueries({ queryKey: ['answers', 'user', questionId, user?.id] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.answers.me(questionId, user!.id) });
 
       // 마이페이지(내가 답변한 질문 목록)도 다시 불러오도록 무효화
-      queryClient.invalidateQueries({ queryKey: ['answers', 'user', user?.id] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.questions.answeredByMe(user!.id) });
     },
   });
 

@@ -30,7 +30,7 @@ export default function SignInForm() {
       const response = await signin(data);
 
       setToken(response.accessToken);
-      setUser(response.email); // TODO 닉네임으로 변경
+      setUser(response.user);
 
       router.push(ROUTES.QUESTIONS);
     } catch (error) {

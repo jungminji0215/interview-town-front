@@ -9,7 +9,7 @@ export default function MyPage() {
       {/* 프로필 */}
       <UserInfo />
 
-      {/* 내가 작성한 답변 리스트 */}
+      {/* 내가 답변한 질문 리스트 */}
       <Suspense fallback={<MyAnswerQuestionsSkeleton />}>
         <MyAnswerQuestions />
       </Suspense>
