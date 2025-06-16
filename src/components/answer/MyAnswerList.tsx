@@ -6,6 +6,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useFetch } from '@/hooks/useFetch';
 import { AnswerWithUser } from '@/types/answer';
+import { QUERY_KEYS } from '@/constants/queryKeys';
 
 type Props = {
   questionId: number;
@@ -21,7 +22,7 @@ export default function MyAnswerList({ questionId }: Props) {
   }
 
   const { data: answers } = useSuspenseQuery<AnswerWithUser[]>({
-    queryKey: ['answers', 'user', questionId, user.id],
+    queryKey: QUERY_KEYS.answers.me(questionId, user.id),
     queryFn: async () => {
       const res = await fetchWrapper(`/api/question/${questionId}/answers/me`);
       return res.data.answers;

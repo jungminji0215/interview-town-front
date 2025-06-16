@@ -6,13 +6,15 @@ import { useAuth } from '@/context/AuthContext';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useFetch } from '@/hooks/useFetch';
 import { MyAnswer } from '@/types/answer';
+import { QUERY_KEYS } from '@/constants/queryKeys';
 
 export default function MyAnswerQuestions() {
   const { user } = useAuth();
   const fetchWrapper = useFetch();
 
+  // 내가 답변한 질문 리스트
   const { data: answers } = useSuspenseQuery({
-    queryKey: ['answers', 'user', user?.id],
+    queryKey: QUERY_KEYS.questions.answeredByMe(user!.id),
     queryFn: async () => {
       const res = await fetchWrapper('/api/me/answers');
       return res.data.answers as MyAnswer[];

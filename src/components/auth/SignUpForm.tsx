@@ -26,7 +26,6 @@ export default function SignUpForm() {
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
       await signup(data);
-      // TODO 성공 시 alert
       router.push(ROUTES.SIGN_IN);
     } catch (error) {
       if (error instanceof Error) {

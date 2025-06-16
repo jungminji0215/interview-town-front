@@ -16,6 +16,7 @@ export default function AnswerList({ questionId }: Props) {
 
   const fetchWrapper = useFetch();
 
+  // TODO 리팩토링
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
     queryKey: ['answers', questionId, user?.id],
     queryFn: ({ pageParam = 1 }) =>
