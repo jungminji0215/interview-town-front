@@ -12,28 +12,13 @@ type PageProps = { params: Promise<{ category: string; id: string }> };
  * generateMetadata: 서버 사이드에서 해당 질문을 가져와 OG 메타 및 SEO 설정
  */
 export async function generateMetadata({ params }: PageProps) {
-  const { id, category } = await params;
+  const { id } = await params;
 
   const question = await getQuestion(Number(id));
 
   return {
-    title: `${question.title} | 면접 타운`,
+    title: `${question.title}`,
     description: question.content,
-    // openGraph: {
-    //   type: 'article',
-    //   title: `${question.title} | 면접 타운`,
-    //   description: question.content,
-    //   url: `https://www.interview-town.com/questions/${category}/${id}`,
-    //   siteName: '면접 타운',
-    //   images: [
-    //     {
-    //       url: '/open-graph-image.png',
-    //       width: 1200,
-    //       height: 630,
-    //       alt: '면접 타운 썸네일',
-    //     },
-    //   ],
-    // },
   };
 }
 

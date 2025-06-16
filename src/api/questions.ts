@@ -1,6 +1,10 @@
 import { notFound } from 'next/navigation';
+import { QuestionsResponse } from '@/types/response';
 
-export const getQuestions = async (page?: number, category?: string) => {
+export const getQuestions = async (
+  page?: number,
+  category?: string,
+): Promise<QuestionsResponse> => {
   const params = new URLSearchParams();
 
   if (page) {
