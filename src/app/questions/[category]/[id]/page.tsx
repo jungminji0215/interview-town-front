@@ -16,9 +16,14 @@ export async function generateMetadata({ params }: PageProps) {
 
   const question = await getQuestion(Number(id));
 
+  const canonicalUrl = `https://www.interview-town.com/questions/${question.category}/${question.id}`;
+
   return {
     title: `${question.title}`,
     description: question.content,
+    alternates: {
+      canonical: canonicalUrl,
+    },
   };
 }
 
