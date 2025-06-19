@@ -7,7 +7,7 @@ export default function UserInfo() {
   const { user } = useAuth();
 
   return (
-    <section className="flex items-center space-x-4">
+    <section className="relative flex items-center space-x-4">
       <UserCircleIcon className="h-16 w-16" />
 
       <div>
@@ -19,6 +19,12 @@ export default function UserInfo() {
           />
         </div>
         <p className="text-gray-400">{user?.email}</p>
+      </div>
+
+      <div className="absolute top-0 right-0">
+        <button className="hover:text-secondary cursor-pointer text-sm text-gray-400">
+          로그아웃
+        </button>
       </div>
     </section>
   );
