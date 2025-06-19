@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import React, { ReactNode } from 'react';
-import Header from '@/components/Header';
+import Navbar from '@/components/Navbar';
 import Providers from '@/providers/QueryProvider';
 import ThemeProvider from '@/theme/ThemeProvider';
 import { AuthProvider } from '@/context/AuthContext';
@@ -75,7 +75,7 @@ export default async function RootLayout({
         >
           <AuthProvider initialUser={initialUser} initialToken={initialToken}>
             <Providers>
-              <Header />
+              <Navbar />
               <main>{children}</main>
             </Providers>
           </AuthProvider>
