@@ -24,7 +24,7 @@ interface AuthProviderProps {
  **/
 export function AuthProvider({ children, initialUser, initialToken }: AuthProviderProps) {
   const [token, setToken] = useState<string | null>(initialToken);
-  const [user, setUser] = useState<User | null>(initialUser);
+  const [user, setUser] = useState<User | null>(initialUser); // TODO user 정보는 tanstack query 로 조회하는 것으로 변경하기
 
   return (
     <AuthContext.Provider value={{ user, token, setToken, setUser }}>
