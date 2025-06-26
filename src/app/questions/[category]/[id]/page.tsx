@@ -49,14 +49,14 @@ export default async function QuestionPage({ params }: PageProps) {
       </Suspense>
 
       {/* 타인이 쓴 답변 */}
-      <Suspense fallback={<AnswerListSkeleton count={5} />}>
-        <section aria-labelledby="answers-heading" className="card">
-          <h3 id="answers-heading" className="text-h3 mb-4 font-semibold">
-            답변
-          </h3>
-          <AnswerList questionId={Number(id)} />
-        </section>
-      </Suspense>
+      {/*<Suspense fallback={<AnswerListSkeleton count={5} />}>*/}
+      <section aria-labelledby="answers-heading" className="card">
+        <h3 id="answers-heading" className="text-h3 mb-4 font-semibold">
+          답변
+        </h3>
+        <AnswerList questionId={Number(id)} />
+      </section>
+      {/*</Suspense>*/}
     </div>
   );
 }

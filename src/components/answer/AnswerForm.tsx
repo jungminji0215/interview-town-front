@@ -1,35 +1,38 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Spinner from '@/components/ui/Spinner';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
 import { useFetch } from '@/hooks/useFetch';
 import { QUERY_KEYS } from '@/constants/queryKeys';
+import { getMe } from '@/api/auth';
+import { addAnswer } from '@/api/answers';
 
 type Props = { questionId: number };
 
 export default function AnswerForm({ questionId }: Props) {
-  const { user } = useAuth();
-  const fetchWithAuth = useFetch();
+  // const { user } = useAuth();
+  // const fetchWithAuth = useFetch();
 
   const [content, setContent] = useState<string>('');
 
   const queryClient = useQueryClient();
 
+  // ✅ 유저 정보 가져오기 (무한 캐싱 중)
+  const { data: userData } = useQuery({
+    queryKey: ['user'],
+    queryFn: getMe,
+    staleTime: Infinity,
+  });
+
+  const user = userData?.user;
+
   const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: async (newAnswer: { questionId: number; content: string }) => {
-      // 백엔드 API 엔드포인트: POST /api/questions/:id/answers
-      const url = `/api/questions/${newAnswer.questionId}/answers`;
-      const body = JSON.stringify({ content: newAnswer.content });
-      // fetchWithAuth가 자동으로 Authorization 헤더를 붙여줌
-      return await fetchWithAuth(url, {
-        method: 'POST',
-        body,
-      });
-    },
+    mutationFn: async (newAnswer: { questionId: number; content: string }) =>
+      addAnswer(questionId, content),
     onSuccess: () => {
       setContent('');
 

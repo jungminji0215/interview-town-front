@@ -7,33 +7,54 @@ export const getAnswers = async ({
   pageParam?: number;
   questionId: number;
 }): Promise<AnswerResponse> => {
+  console.log('getAnswers');
+
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/questions/${questionId}/answers?page=${pageParam}&pageSize=10`,
-  );
-
-  if (!response.ok) {
-    throw new Error('답변 목록 불러오기 실패');
-  }
-
-  return response.json();
-};
-
-export const addAnswer = async (questionId: number, content: string) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/questions/${questionId}/answers`,
+    `/api/questions/${questionId}/answers?page=${pageParam}&pageSize=10`,
     {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // TODO signin 기능 생기기 전까지 userId 는 모두 1 으로 저장
-      body: JSON.stringify({ userId: 1, content }),
+      method: 'GET',
+      credentials: 'include',
     },
   );
 
+  console.log('getAnswers response : ', response);
+
+  const data = await response.json();
+
   if (!response.ok) {
-    const errorData = await response.json().catch(() => null);
-    const message = errorData?.message || '알 수 없는 오류가 발생했습니다.';
-    throw new Error(message);
+    throw new Error(data.message);
   }
+
+  return data;
+};
+
+export const getMyAnswers = async (questionId: number) => {
+  const response = await fetch(`/api/questions/${questionId}/answers/me`, {
+    method: 'GET',
+    credentials: 'include',
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
+};
+
+export const addAnswer = async (questionId: number, content: string) => {
+  const response = await fetch(`/api/questions/${questionId}/answers`, {
+    method: 'POST',
+    credentials: 'include',
+    body: JSON.stringify({ content }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
 };

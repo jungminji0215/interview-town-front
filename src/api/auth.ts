@@ -17,7 +17,13 @@ export const signup = async ({ email, password }: { email: string; password: str
   return data;
 };
 
+/**
+ * 로그인을 통해 서버가 쿠키(예: refreshToken)를 설정하게 하려면 반드시 클라이언트 측에서 fetch 요청을 보내야 함.
+ */
 export const signin = async ({ email, password }: { email: string; password: string }) => {
+  console.log('email : ', email);
+  console.log('password : ', password);
+
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/signin`, {
     method: 'POST',
     headers: {

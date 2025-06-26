@@ -9,11 +9,12 @@ import { z } from 'zod';
 import { authSchema } from '@/schemas/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '@/context/AuthContext';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type FormFields = z.infer<typeof authSchema>;
 
 export default function SignInForm() {
-  const { setToken, setUser } = useAuth();
+  // const { setUser } = useAuth();
   const router = useRouter();
 
   const {
@@ -25,15 +26,16 @@ export default function SignInForm() {
     resolver: zodResolver(authSchema),
   });
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    try {
-      const response = await signin(data);
+  const qc = useQueryClient();
 
-      setToken(response.accessToken);
-      setUser(response.user);
-
+  // @ts-ignore
+  const mutation = useMutation({
+    mutationFn: signin,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['user'] });
       router.push(ROUTES.QUESTIONS);
-    } catch (error) {
+    },
+    onError: (error: any) => {
       if (error instanceof Error) {
         switch (error.message) {
           case 'invalid_credentials':
@@ -50,8 +52,39 @@ export default function SignInForm() {
         alert('알 수 없는 오류가 발생했습니다.');
         console.error(error);
       }
-    }
+    },
+  });
+
+  const onSubmit: SubmitHandler<FormFields> = (data) => {
+    mutation.mutate(data);
   };
+
+  // const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  //   try {
+  //     const response = await signin(data);
+  //
+  //     // setUser(response.user);
+  //
+  //     router.push(ROUTES.QUESTIONS);
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       switch (error.message) {
+  //         case 'invalid_credentials':
+  //           setError('root', {
+  //             type: 'server',
+  //             message: '이메일 또는 비밀번호를 확인해주세요.',
+  //           });
+  //           break;
+  //         default:
+  //           alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+  //           console.error(error);
+  //       }
+  //     } else {
+  //       alert('알 수 없는 오류가 발생했습니다.');
+  //       console.error(error);
+  //     }
+  //   }
+  // };
 
   return (
     <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>

@@ -6,23 +6,23 @@ import React from 'react';
 import Spinner from '@/components/ui/Spinner';
 import { useAuth } from '@/context/AuthContext';
 import { useFetch } from '@/hooks/useFetch';
+import { getAnswers } from '@/api/answers';
 
 type Props = {
   questionId: number;
 };
 
 export default function AnswerList({ questionId }: Props) {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  //
+  // const fetchWrapper = useFetch();
 
-  const fetchWrapper = useFetch();
+  console.log('질문 상세 페이지에서 답변을 조회할께');
 
   // TODO 리팩토링
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
-    queryKey: ['answers', questionId, user?.id],
-    queryFn: ({ pageParam = 1 }) =>
-      fetchWrapper(`/api/questions/${questionId}/answers?page=${pageParam}&pageSize=10`, {
-        method: 'GET',
-      }),
+    queryKey: ['answers', questionId],
+    queryFn: ({ pageParam = 1 }) => getAnswers({ questionId, pageParam }),
     initialPageParam: 1,
     getNextPageParam: (last) => {
       const { currentPage, totalPages } = last.data.pagination;

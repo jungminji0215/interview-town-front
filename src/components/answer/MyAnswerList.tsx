@@ -3,30 +3,36 @@
 import React from 'react';
 import AnswerItem from './AnswerItem';
 import { useAuth } from '@/context/AuthContext';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useFetch } from '@/hooks/useFetch';
 import { AnswerWithUser } from '@/types/answer';
 import { QUERY_KEYS } from '@/constants/queryKeys';
+import { getMe } from '@/api/auth';
+import { getAnswers, getMyAnswers } from '@/api/answers';
 
 type Props = {
   questionId: number;
 };
 
 export default function MyAnswerList({ questionId }: Props) {
-  const { user } = useAuth();
-  const fetchWrapper = useFetch();
+  // const { user } = useAuth();
+  // const fetchWrapper = useFetch();
+  //
+  // // 로그인 안 했으면 렌더링 안 함
+  // if (!user) {
+  //   return null;
+  // }
 
-  // 로그인 안 했으면 렌더링 안 함
+  const { data: userData } = useQuery({ queryKey: ['user'], queryFn: getMe, staleTime: Infinity });
+  const user = userData?.user;
   if (!user) {
     return null;
   }
 
   const { data: answers } = useSuspenseQuery<AnswerWithUser[]>({
     queryKey: QUERY_KEYS.answers.me(questionId, user.id),
-    queryFn: async () => {
-      const res = await fetchWrapper(`/api/question/${questionId}/answers/me`);
-      return res.data.answers;
-    },
+    queryFn: async () => getMyAnswers(questionId),
+
     // enabled: !!user?.id, // useSuspenseQuery 는 해당 옵션이 없어서 사용하지 못 함
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
