@@ -4,7 +4,6 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import AnswerItem from './AnswerItem';
 import React from 'react';
 import Spinner from '@/components/ui/Spinner';
-import { useAuth } from '@/context/AuthContext';
 import { useFetch } from '@/hooks/useFetch';
 
 type Props = {
@@ -12,13 +11,11 @@ type Props = {
 };
 
 export default function AnswerList({ questionId }: Props) {
-  const { user } = useAuth();
-
   const fetchWrapper = useFetch();
 
   // TODO 리팩토링
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
-    queryKey: ['answers', questionId, user?.id],
+    queryKey: ['answers', questionId],
     queryFn: ({ pageParam = 1 }) =>
       fetchWrapper(`/api/questions/${questionId}/answers?page=${pageParam}&pageSize=10`, {
         method: 'GET',

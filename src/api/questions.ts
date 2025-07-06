@@ -20,7 +20,7 @@ export const getQuestions = async (
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/questions${query ? `?${query}` : ''}`;
 
-  const response = await fetch(url, { next: { revalidate: 10 } });
+  const response = await fetch(url, { next: { tags: ['questions'] } });
 
   if (!response.ok) {
     throw new Error('질문 목록 불러오기 실패');
@@ -32,7 +32,7 @@ export const getQuestions = async (
 
 export const getQuestion = async (id: number) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/questions/${id}`, {
-    next: { revalidate: 10 },
+    next: { tags: ['questions', `question:${id}`] },
   });
 
   if (!response.ok) {
