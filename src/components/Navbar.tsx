@@ -3,7 +3,7 @@ import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
 import AuthMenu from '@/components/AuthMenu';
 
-export default function Header() {
+export default function Navbar() {
   return (
     <header className="shadow-md">
       <nav

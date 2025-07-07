@@ -12,6 +12,9 @@ export default function MyAnswerQuestions() {
   const { user } = useAuth();
   const fetchWrapper = useFetch();
 
+  // TODO 컴포넌트 중간에 이런 로직 불편.. 리팩토링 하기
+  if (!user) return null;
+
   // 내가 답변한 질문 리스트
   const { data: answers } = useSuspenseQuery({
     queryKey: QUERY_KEYS.questions.answeredByMe(user!.id),
