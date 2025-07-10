@@ -1,36 +1,45 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, ReactNode } from 'react';
 import { User } from '@/types/user';
+import { useQuery } from '@tanstack/react-query';
 
 type AuthContextType = {
-  token: string | null;
   user: User | null;
-  setToken: React.Dispatch<React.SetStateAction<string | null>>;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  isLoggedIn: boolean;
+  isLoading: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-interface AuthProviderProps {
-  children: ReactNode;
-  initialUser: User | null;
-  initialToken: string | null;
-}
+// 사용자 정보를 가져오는 API 호출 함수
+// 이제 BFF 프록시를 통해 안전하게 호출됩니다.
+const fetchMe = async (): Promise<User | null> => {
+  try {
+    const response = await fetch('/api/me'); // BFF 프록시 호출
+    if (!response.ok) return null;
+    const data = await response.json();
+    return data.user;
+  } catch {
+    return null;
+  }
+};
 
-/**
- * 서버(layout)에서 넘겨준
- * initialUser/initialToken을 그대로 초기 상태로 사용
- **/
-export function AuthProvider({ children, initialUser, initialToken }: AuthProviderProps) {
-  const [token, setToken] = useState<string | null>(initialToken);
-  const [user, setUser] = useState<User | null>(initialUser); // TODO user 정보는 tanstack query 로 조회하는 것으로 변경하기
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const { data: user, isLoading } = useQuery({
+    queryKey: ['user', 'me'],
+    queryFn: fetchMe,
+    staleTime: Infinity,
+    gcTime: Infinity,
+  });
 
-  return (
-    <AuthContext.Provider value={{ user, token, setToken, setUser }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const value = {
+    user: user ?? null,
+    isLoggedIn: !!user,
+    isLoading,
+  };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 export const useAuth = () => {

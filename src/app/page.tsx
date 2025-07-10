@@ -4,7 +4,7 @@ import { ChatBubbleOvalLeftEllipsisIcon, ChevronRightIcon } from '@heroicons/rea
 
 const features = [
   {
-    title: '질문 찾기',
+    title: '질문 모아 보기',
     description: '카테고리 별로 면접 질문을 한 번에 모아보세요.',
     href: ROUTES.QUESTIONS,
     icon: ChevronRightIcon,
@@ -45,10 +45,10 @@ export default function HomePage() {
             <h3 className="mb-2 text-2xl font-semibold">{title}</h3>
             <p className="text-gray-500">{description}</p>
 
-            <div className="text-secondary mt-6 inline-flex items-center transition">
-              <span>알아보기</span>
-              <ChevronRightIcon className="ml-1 h-5 w-5" />
-            </div>
+            {/*<div className="text-secondary mt-6 inline-flex items-center transition">*/}
+            {/*  <span>알아보기</span>*/}
+            {/*  <ChevronRightIcon className="ml-1 h-5 w-5" />*/}
+            {/*</div>*/}
           </Link>
         ))}
       </section>

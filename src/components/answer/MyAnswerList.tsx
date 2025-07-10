@@ -2,55 +2,22 @@
 
 import React from 'react';
 import AnswerItem from './AnswerItem';
-import { useAuth } from '@/context/AuthContext';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { useFetch } from '@/hooks/useFetch';
+
 import { AnswerWithUser } from '@/types/answer';
 import { QUERY_KEYS } from '@/constants/queryKeys';
 
 type Props = {
-  questionId: number;
+  initialAnswer: AnswerWithUser[];
 };
 
-export default function MyAnswerList({ questionId }: Props) {
-  const { user } = useAuth();
-  const fetchWrapper = useFetch();
-
-  // 로그인 안 했으면 렌더링 안 함
-  if (!user) {
-    return null;
-  }
-
-  const { data: answers } = useSuspenseQuery<AnswerWithUser[]>({
-    queryKey: QUERY_KEYS.answers.me(questionId, user.id),
-    queryFn: async () => {
-      const res = await fetchWrapper(`/api/question/${questionId}/answers/me`);
-      return res.data.answers;
-    },
-    // enabled: !!user?.id, // useSuspenseQuery 는 해당 옵션이 없어서 사용하지 못 함
-    staleTime: 60 * 1000,
-    gcTime: 300 * 1000,
-  });
-
-  if (answers.length === 0) {
-    return (
-      <section className="card">
-        <h3 className="text-h3 mb-4 font-semibold">나의 답변</h3>
-        <div className="text-center text-gray-400">
-          <p>답변을 등록해보세요. 😆</p>
-        </div>
-      </section>
-    );
-  }
-
+export default function MyAnswerList({ initialAnswer }: Props) {
+  // 더 이상 로그인 여부나 데이터 로딩 상태를 확인할 필요가 없습니다.
+  // 이 컴포넌트가 렌더링되었다는 것 자체가 '나의 답변'이 존재한다는 의미입니다.
   return (
-    <section className="card">
-      <h3 className="text-h3 mb-4 font-semibold">나의 답변</h3>
-      <ul className="flex flex-col gap-5">
-        {answers.map((answer) => (
-          <AnswerItem key={answer.id} answer={answer} />
-        ))}
-      </ul>
-    </section>
+    <ul className="flex flex-col gap-5">
+      {initialAnswer.map((answer) => (
+        <AnswerItem key={answer.id} answer={answer} />
+      ))}
+    </ul>
   );
 }

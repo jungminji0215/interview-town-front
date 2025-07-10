@@ -1,13 +1,12 @@
 import React from 'react';
-import { getQuestion } from '@/api/questions';
+import { getQuestion } from '@/lib/api/questions';
+import { Question } from '@/types/question';
 
 type Props = {
-  questionId: number;
+  question: Question;
 };
 
-export default async function QuestionDetail({ questionId }: Props) {
-  const question = await getQuestion(questionId);
-
+export default function QuestionDetail({ question }: Props) {
   return (
     <article aria-labelledby="question-title">
       <h2 id="question-title" className="text-h2 mb-4 font-bold">

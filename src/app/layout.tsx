@@ -5,8 +5,6 @@ import Navbar from '@/components/Navbar';
 import Providers from '@/providers/QueryProvider';
 import ThemeProvider from '@/theme/ThemeProvider';
 import { AuthProvider } from '@/context/AuthContext';
-import { User } from '@/types/user';
-import { cookies } from 'next/headers';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.interview-town.com'),
@@ -21,49 +19,11 @@ export const metadata: Metadata = {
   },
 };
 
-type SessionResponse = {
-  isLoggedIn: boolean;
-  accessToken?: string;
-  user?: User;
-};
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: ReactNode;
 }>) {
-  // TODO 깔끔하게 파일 분리
-
-  // 1) 브라우저(클라이언트)가 보낸 쿠키( HttpOnly refreshToken )를 읽어옴
-  //  cookies() 자체가 Promise<ReadonlyRequestCookies>를 반환하므로 반드시 await 해 주어야 함
-  const cookieStore = await cookies();
-  const cookieHeader = cookieStore
-    .getAll()
-    .map((c) => `${c.name}=${c.value}`)
-    .join('; ');
-
-  // 2) Express API( /api/session ) 호출
-  let sessionData: SessionResponse = { isLoggedIn: false };
-
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/session`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        // HttpOnly 쿠키( refreshToken )를 그대로 전달
-        cookie: cookieHeader,
-      },
-    });
-    if (response.ok) {
-      sessionData = await response.json();
-    }
-  } catch (error) {
-    console.error('세션 조회 오류:', error);
-  }
-
-  const initialUser = sessionData.isLoggedIn ? sessionData.user! : null;
-  const initialToken = sessionData.isLoggedIn ? sessionData.accessToken! : null;
-
   return (
     <html lang="ko" suppressHydrationWarning>
       <body>
@@ -73,12 +33,12 @@ export default async function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <AuthProvider initialUser={initialUser} initialToken={initialToken}>
-            <Providers>
+          <Providers>
+            <AuthProvider>
               <Navbar />
               <main>{children}</main>
-            </Providers>
-          </AuthProvider>
+            </AuthProvider>
+          </Providers>
         </ThemeProvider>
       </body>
     </html>

@@ -33,6 +33,7 @@ export type AnswerWithUser = {
   createdAt: string;
   questionId: number;
   user: {
+    id: number;
     nickname: string;
   };
 };

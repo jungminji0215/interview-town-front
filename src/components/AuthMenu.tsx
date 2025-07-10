@@ -1,12 +1,10 @@
-'use client';
-
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
-import { useAuth } from '@/context/AuthContext';
+import { getUser } from '@/lib/session';
 
-export default function AuthMenu() {
-  const { user } = useAuth();
+export default async function AuthMenu() {
+  const user = await getUser();
 
   if (!user) {
     return (

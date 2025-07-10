@@ -1,5 +1,5 @@
 import Pagination from '@/components/Pagination';
-import { getQuestions } from '@/api/questions';
+import { getQuestions } from '@/lib/api/questions';
 import QuestionItems from '@/components/QuestionItems';
 
 type Props = {

@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
 import CategoryList from '@/components/CategoryList';
-import { getCategories } from '@/api/categories';
+import { getCategories } from '@/lib/api/categories';
 
 type Props = { children: ReactNode };
 
