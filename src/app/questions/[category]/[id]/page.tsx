@@ -1,10 +1,10 @@
 import React, { Suspense } from 'react';
 import QuestionDetail from '@/components/QuestionDetail';
 import AnswerList from '@/components/answer/AnswerList';
-import AnswerForm from '@/components/answer/AnswerForm';
 import AnswerListSkeleton from '@/components/skeleton/AnswerListSkeleton';
-import { getQuestion } from '@/api/questions';
-import MyAnswerList from '@/components/answer/MyAnswerList';
+import { getQuestion } from '@/lib/question';
+
+import MyAnswer from '@/components/answer/MyAnswer';
 
 type PageProps = { params: Promise<{ category: string; id: string }> };
 
@@ -28,32 +28,26 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function QuestionPage({ params }: PageProps) {
+  // 게시글 ID
   const { id } = await params;
 
   return (
     <div className="wrapper flex flex-col gap-5">
-      <section aria-labelledby="question-title" className="card">
+      {/* 질문 상세 */}
+      <section className="card">
         <QuestionDetail questionId={Number(id)} />
       </section>
 
-      <section aria-labelledby="answer-form-heading" className="card">
-        {/*<h2 id="answer-form-heading" className="sr-only">*/}
-        {/*  답변 등록*/}
-        {/*</h2>*/}
-        <AnswerForm questionId={Number(id)} />
+      <section className="card">
+        <Suspense fallback={<AnswerListSkeleton count={1} />}>
+          <MyAnswer questionId={Number(id)} />
+        </Suspense>
       </section>
-
-      {/* 내가 쓴 답변 */}
-      <Suspense fallback={<AnswerListSkeleton count={1} />}>
-        <MyAnswerList questionId={Number(id)} />
-      </Suspense>
 
       {/* 타인이 쓴 답변 */}
       <Suspense fallback={<AnswerListSkeleton count={5} />}>
-        <section aria-labelledby="answers-heading" className="card">
-          <h3 id="answers-heading" className="text-h3 mb-4 font-semibold">
-            답변
-          </h3>
+        <section className="card">
+          <h3 className="text-h3 mb-4 font-semibold">답변</h3>
           <AnswerList questionId={Number(id)} />
         </section>
       </Suspense>

@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getQuestions } from '@/api/questions';
+import { getQuestions } from '@/lib/question';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.interview-town.com';

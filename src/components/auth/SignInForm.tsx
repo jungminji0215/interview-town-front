@@ -1,6 +1,5 @@
 'use client';
 
-import { signin } from '@/api/auth';
 import Spinner from '@/components/ui/Spinner';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
@@ -8,12 +7,14 @@ import { ROUTES } from '@/constants/routes';
 import { z } from 'zod';
 import { authSchema } from '@/schemas/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAuth } from '@/context/AuthContext';
+
+// import 만 다르고 사용 방법은 똑같다. 다만 서버에서 돌아가냐 클라이언트에서 돌아가냐 차이
+import { signIn } from 'next-auth/react'; // 클라이언트에서는 이거
+// import { signIn } from '@auth'; // 서버 환경에서는 이거
 
 type FormFields = z.infer<typeof authSchema>;
 
 export default function SignInForm() {
-  const { setToken, setUser } = useAuth();
   const router = useRouter();
 
   const {
@@ -27,29 +28,25 @@ export default function SignInForm() {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     try {
-      const response = await signin(data);
+      const result = await signIn('credentials', {
+        username: data.email,
+        password: data.password,
+        redirect: false,
+        // redirect : true로 하면 서버쪽에서 리다이랙트함 (그래서 서버 리다이랙트 끔)
+        // 하지만 redirect: false 이면 로그인 실패해도 오류가 발생해도 status 가 200임
+        // 그래서 실패할 경우 코드를 변경하는 방식으로 하기 auth.ts 에서
+      });
 
-      setToken(response.accessToken);
-      setUser(response.user);
-
-      router.push(ROUTES.QUESTIONS);
-    } catch (error) {
-      if (error instanceof Error) {
-        switch (error.message) {
-          case 'invalid_credentials':
-            setError('root', {
-              type: 'server',
-              message: '이메일 또는 비밀번호를 확인해주세요.',
-            });
-            break;
-          default:
-            alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-            console.error(error);
-        }
+      if (result.code === 'invalid_credentials') {
+        setError('root', {
+          type: 'server',
+          message: '이메일 또는 비밀번호를 확인해주세요.',
+        });
       } else {
-        alert('알 수 없는 오류가 발생했습니다.');
-        console.error(error);
+        router.replace(ROUTES.QUESTIONS);
       }
+    } catch (error) {
+      alert('알 수 없는 오류가 발생했습니다.'); // 서버 꺼져도 여기로 안오네
     }
   };
 

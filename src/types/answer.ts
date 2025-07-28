@@ -1,3 +1,5 @@
+import { User } from 'next-auth';
+
 export type Answer = {
   id: number;
   content: string;
@@ -5,6 +7,7 @@ export type Answer = {
   updatedAt?: string;
   questionId: number;
   userId?: number;
+  user: User;
 };
 
 export type AnswerResponse = {
@@ -17,22 +20,10 @@ export type AnswerResponse = {
   };
 };
 
-export type MyAnswer = {
-  questionId: number;
-  questionTitle: string;
-  categoryId: number;
-  categoryName: string;
-  answerId: number;
-  content: string;
-  answeredAt: string;
-};
-
-export type AnswerWithUser = {
-  id: number;
-  content: string;
-  createdAt: string;
-  questionId: number;
-  user: {
-    nickname: string;
+export type MyAnswerResponse = {
+  data: {
+    answer: Answer | null;
   };
 };
+
+export type AnswerWithUser = Answer & User;

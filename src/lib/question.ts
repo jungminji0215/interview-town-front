@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { QuestionsResponse } from '@/types/response';
+import { QUERY_KEYS } from '@/constants/queryKeys';
 
 export const getQuestions = async (
   page?: number,
@@ -20,7 +21,12 @@ export const getQuestions = async (
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}/api/questions${query ? `?${query}` : ''}`;
 
-  const response = await fetch(url, { next: { tags: ['questions'] } });
+  const response = await fetch(url, {
+    next: {
+      // tags: QUERY_KEYS.questions.list()
+      tags: ['questions'],
+    },
+  });
 
   if (!response.ok) {
     throw new Error('질문 목록 불러오기 실패');
@@ -32,7 +38,7 @@ export const getQuestions = async (
 
 export const getQuestion = async (id: number) => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/questions/${id}`, {
-    next: { tags: ['questions', `question:${id}`] },
+    next: { tags: [`question:${id}`] },
   });
 
   if (!response.ok) {

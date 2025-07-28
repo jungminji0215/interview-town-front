@@ -3,41 +3,31 @@
 import React, { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Spinner from '@/components/ui/Spinner';
-import { useAuth } from '@/context/AuthContext';
-import Link from 'next/link';
-import { ROUTES } from '@/constants/routes';
-import { useFetch } from '@/hooks/useFetch';
+import { addAnswer } from '@/lib/answers';
 import { QUERY_KEYS } from '@/constants/queryKeys';
+import { User } from 'next-auth';
 
-type Props = { questionId: number };
+type Props = {
+  questionId: number;
+  user: User | undefined;
+};
 
-export default function AnswerForm({ questionId }: Props) {
-  const { user } = useAuth();
-  const fetchWithAuth = useFetch();
-
+export default function AnswerForm({ questionId, user }: Props) {
   const [content, setContent] = useState<string>('');
 
   const queryClient = useQueryClient();
 
   const { mutate, isPending, isError, error } = useMutation({
-    mutationFn: async (newAnswer: { questionId: number; content: string }) => {
-      // 백엔드 API 엔드포인트: POST /api/questions/:id/answers
-      const url = `/api/questions/${newAnswer.questionId}/answers`;
-      const body = JSON.stringify({ content: newAnswer.content });
-      // fetchWithAuth가 자동으로 Authorization 헤더를 붙여줌
-      return await fetchWithAuth(url, {
-        method: 'POST',
-        body,
-      });
-    },
+    mutationFn: async (newAnswer: { questionId: number; content: string }) =>
+      addAnswer(newAnswer.questionId, newAnswer.content),
     onSuccess: () => {
       setContent('');
 
-      // queryClient.invalidateQueries({ queryKey: ['answers', 'user', questionId, user?.id] });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.answers.me(questionId, user!.id) });
+      queryClient.invalidateQueries({ queryKey: ['answers', questionId] });
+      queryClient.invalidateQueries({ queryKey: ['answers', 'me', questionId, user?.id] });
 
       // 마이페이지(내가 답변한 질문 목록)도 다시 불러오도록 무효화
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.questions.answeredByMe(user!.id) });
+      // queryClient.invalidateQueries({ queryKey: QUERY_KEYS.questions.answeredByMe(user.id) });
     },
   });
 
@@ -46,22 +36,6 @@ export default function AnswerForm({ questionId }: Props) {
     if (!content.trim()) return;
     mutate({ questionId, content });
   };
-
-  if (!user) {
-    return (
-      <div className="rounded-lg p-6 text-center">
-        <p className="mb-4 text-gray-400">
-          답변을 달려면 <strong>로그인</strong>이 필요합니다.
-        </p>
-        <Link
-          href={ROUTES.SIGN_IN}
-          className="btn-primary inline-block rounded px-4 py-2 text-white"
-        >
-          로그인하러 가기
-        </Link>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit} aria-label="답변 등록 폼">

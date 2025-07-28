@@ -1,5 +1,5 @@
-import { getQuestions } from '@/api/questions';
 import AdminQuestionList from '@/components/admin/AdminQuestionList';
+import { getQuestions } from '@/lib/question';
 
 // 관리자 페이지는 검색 엔진에 노출될 필요가 없으므로 noindex를 추가
 export const metadata = {
