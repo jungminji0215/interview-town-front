@@ -72,7 +72,7 @@ export const {
 
   cookies: {
     sessionToken: {
-      name: 'next-auth.session-token',
+      name: 'authjs.session-token',
       options: {
         domain: '.interview-town.com',
         path: '/',
