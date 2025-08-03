@@ -69,4 +69,16 @@ export const {
       return session;
     },
   },
+
+  cookies: {
+    sessionToken: {
+      name: 'next-auth.session-token',
+      options: {
+        domain: '.interview-town.com',
+        path: '/',
+        sameSite: 'none',
+        secure: true,
+      },
+    },
+  },
 });
