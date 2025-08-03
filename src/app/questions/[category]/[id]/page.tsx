@@ -38,11 +38,11 @@ export default async function QuestionPage({ params }: PageProps) {
         <QuestionDetail questionId={Number(id)} />
       </section>
 
-      {/*<section className="card">*/}
-      {/*  <Suspense fallback={<AnswerListSkeleton count={1} />}>*/}
-      {/*    <MyAnswer questionId={Number(id)} />*/}
-      {/*  </Suspense>*/}
-      {/*</section>*/}
+      <section className="card">
+        <Suspense fallback={<AnswerListSkeleton count={1} />}>
+          <MyAnswer questionId={Number(id)} />
+        </Suspense>
+      </section>
 
       {/* 타인이 쓴 답변 */}
       <Suspense fallback={<AnswerListSkeleton count={5} />}>
