@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { ROUTES } from '@/constants/routes';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
-import { useAuth } from '@/context/AuthContext';
+import { useSession } from 'next-auth/react';
 
 export default function AuthMenu() {
-  const { user } = useAuth();
+  const { data } = useSession();
 
-  if (!user) {
+  if (!data?.user) {
     return (
       <Link href={ROUTES.SIGN_IN}>
         <p>로그인</p>

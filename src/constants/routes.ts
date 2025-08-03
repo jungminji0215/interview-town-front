@@ -1,7 +1,7 @@
 export const ROUTES = {
   HOME: '/',
   QUESTIONS: '/questions',
-  SIGN_IN: '/auth/signin',
-  SIGN_UP: '/auth/signup',
+  SIGN_IN: '/signin',
+  SIGN_UP: '/signup',
   MY_PAGE: '/mypage',
 };

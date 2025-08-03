@@ -1,6 +1,6 @@
 import Pagination from '@/components/Pagination';
-import { getQuestions } from '@/api/questions';
 import QuestionItems from '@/components/QuestionItems';
+import { getQuestions } from '@/lib/question';
 
 type Props = {
   page: number;

@@ -4,22 +4,19 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import AnswerItem from './AnswerItem';
 import React from 'react';
 import Spinner from '@/components/ui/Spinner';
-import { useFetch } from '@/hooks/useFetch';
+import { getAnswers } from '@/lib/answers';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   questionId: number;
 };
 
 export default function AnswerList({ questionId }: Props) {
-  const fetchWrapper = useFetch();
+  const { data: session } = useSession();
 
-  // TODO 리팩토링
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useSuspenseInfiniteQuery({
     queryKey: ['answers', questionId],
-    queryFn: ({ pageParam = 1 }) =>
-      fetchWrapper(`/api/questions/${questionId}/answers?page=${pageParam}&pageSize=10`, {
-        method: 'GET',
-      }),
+    queryFn: ({ pageParam }) => getAnswers({ pageParam, questionId }),
     initialPageParam: 1,
     getNextPageParam: (last) => {
       const { currentPage, totalPages } = last.data.pagination;
@@ -37,11 +34,13 @@ export default function AnswerList({ questionId }: Props) {
     );
   }
 
+  console.log('answers : ', answers);
+
   return (
     <>
       <ul className="flex flex-col gap-5">
         {answers.map((answer) => (
-          <AnswerItem key={answer.id} answer={answer} />
+          <AnswerItem key={answer.id} answer={answer} user={session?.user} />
         ))}
       </ul>
 

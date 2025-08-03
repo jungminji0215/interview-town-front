@@ -1,6 +1,5 @@
 'use client';
 
-import { signup } from '@/api/auth';
 import Spinner from '@/components/ui/Spinner';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
@@ -8,6 +7,7 @@ import { ROUTES } from '@/constants/routes';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authSchema } from '@/schemas/auth';
+import { signup } from '@/lib/auth';
 
 type FormFields = z.infer<typeof authSchema>;
 
@@ -21,6 +21,7 @@ export default function SignUpForm() {
     formState: { errors, isSubmitting },
   } = useForm<FormFields>({
     resolver: zodResolver(authSchema),
+    mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
@@ -29,9 +30,8 @@ export default function SignUpForm() {
       router.push(ROUTES.SIGN_IN);
     } catch (error) {
       if (error instanceof Error) {
-        // TODO 분리
         switch (error.message) {
-          case 'user_exist':
+          case 'user_exists':
             setError('email', { type: 'server', message: '이미 사용 중인 이메일입니다.' });
             break;
           case 'invalid_email':
@@ -44,7 +44,7 @@ export default function SignUpForm() {
             });
             break;
           default:
-            alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.'); // 서버 꺼지면 여기로옴
             console.error(error);
         }
       } else {
@@ -72,7 +72,6 @@ export default function SignUpForm() {
       />
       {errors?.password && <p className="px-2 text-sm text-red-500">{errors.password.message}</p>}
 
-      {/* TODO 버튼 분리 */}
       <button
         disabled={isSubmitting}
         type="submit"
